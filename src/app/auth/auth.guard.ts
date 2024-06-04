@@ -1,5 +1,9 @@
-import { CanActivateFn } from '@angular/router';
+import { inject } from '@angular/core';
+import { CanActivateFn, Router } from '@angular/router';
+import { remult } from 'remult';
 
 export const authGuard: CanActivateFn = (route, state) => {
-  return true;
+  if (remult.authenticated()) return true;
+  inject(Router).navigate(['/login']);
+  return false;
 };

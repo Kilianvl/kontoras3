@@ -5,5 +5,33 @@
     "lastname": "Müller",
     "archived": false,
     "createdAt": "2024-05-30T00:01:30.860Z"
+  },
+  {
+    "id": "c9rrzv433xov5m1j988y49qg",
+    "firstname": "Hans",
+    "lastname": "Meiser",
+    "archived": false,
+    "createdAt": "2024-06-03T13:48:46.925Z"
+  },
+  {
+    "id": "qpluxk0ki2ldgq3l17vzevac",
+    "firstname": "Peter",
+    "lastname": "Lustig",
+    "archived": false,
+    "createdAt": "2024-06-03T13:48:56.555Z"
+  },
+  {
+    "id": "yppke3nfbdslg1gx98ichqqc",
+    "firstname": "Lisa",
+    "lastname": "Müller",
+    "archived": false,
+    "createdAt": "2024-06-03T13:49:13.100Z"
+  },
+  {
+    "id": "fadoh11w2agwu0qk38ry89qc",
+    "firstname": "Bern",
+    "lastname": "Griller",
+    "archived": false,
+    "createdAt": "2024-06-03T13:49:21.162Z"
   }
 ]

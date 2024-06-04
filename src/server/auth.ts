@@ -38,7 +38,7 @@ auth.post('/api/logout', async (req, res) => {
   res.json('logged out');
 });
 
-auth.post('/api/currentUser', async (req, res) => {
+auth.get('/api/currentUser', async (req, res) => {
   if (req.session) {
     res.json(req.session['user']);
   } else {
