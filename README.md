@@ -1,27 +1,41 @@
 # Kontoras3
+Die Revolution der Buchhaltungssoftware
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.2.
+Erleben Sie die Freiheit und Flexibilität, die nur eine Open Source Buchhaltungssoftware bieten kann. Kontoras3 ist die perfekte Lösung für Selbstständige, kleine Unternehmen und Start-ups, die ihre Buchhaltung effizient, kostengünstig und transparent gestalten möchten.
 
-## Development server
+# Warum Kontoras3?
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+* **Open Source:** Profitieren Sie von der Transparenz und Flexibilität einer Open Source Software. Anpassungen und Erweiterungen sind dank des offenen Quellcodes jederzeit möglich, sodass Sie die Software genau auf Ihre Bedürfnisse zuschneiden können.
+* **Einfache Bedienung:** Eine intuitive Benutzeroberfläche und klare Struktur ermöglichen Ihnen einen schnellen Einstieg und eine effiziente Verwaltung Ihrer Finanzen, auch ohne tiefgehende Buchhaltungskenntnisse.
+* **Automatisierte Prozesse:** Automatisieren Sie wiederkehrende Aufgaben wie Rechnungsstellung, Mahnwesen und Steuerberechnungen. Sparen Sie Zeit und minimieren Sie Fehler durch automatisierte Workflows.
+* **Sicher und Datenschutzkonform:** Ihre Daten sind bei uns sicher. Kontoras3 setzt auf modernste Verschlüsselungstechnologien und regelmäßige Sicherheitsupdates. Zusätzlich bleibt die Kontrolle über Ihre Daten stets bei Ihnen.
+* **Umfangreiche Funktionen:** Von der Rechnungsstellung über das Kundenmanagement bis hin zur Einnahmen-Überschuss-Rechnung – Kontoras3 bietet alle Funktionen, die Sie für eine vollständige Buchhaltung benötigen.
+* **Integrationen:** Nahtlose Integration mit anderen Tools und Plattformen wie Online-Banking, E-Commerce und CRM-Systemen. Nutzen Sie bestehende Schnittstellen oder entwickeln Sie eigene Erweiterungen.
+* **Community & Support:** Profitieren Sie von einer starken Community, die sich gegenseitig unterstützt. Zudem steht Ihnen unser professioneller Support zur Seite, um bei Fragen und Problemen schnell zu helfen.
 
-## Code scaffolding
+# Funktionen im Überblick
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+* **Rechnungsstellung:** Erstellen und versenden Sie professionelle Rechnungen und Angebote mit wenigen Klicks.
+* **Belegverwaltung:** Digitalisieren und organisieren Sie Ihre Belege, sodass Sie jederzeit den Überblick behalten.
+* **Bankabgleich:** Automatischer Abgleich Ihrer Banktransaktionen für eine lückenlose Buchhaltung.
+* **Finanzberichte:** Erstellen Sie detaillierte Berichte und Analysen zur finanziellen Lage Ihres Unternehmens.
+* **Steuererklärung:** Vorbereitung und Unterstützung bei der Erstellung Ihrer Steuererklärungen.
+* **Mehrbenutzerfähigkeiten:** Verwalten Sie mehrere Benutzer und Zugriffsrechte, ideal für Teams und wachsende Unternehmen.
+* **Plattformübergreifend:** Nutzen Sie Kontoras3 auf verschiedenen Geräten und Betriebssystemen – ob Desktop, Tablet oder Smartphone.
 
-## Build
+# Fazit
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Mit Kontoras3 entscheiden Sie sich für eine leistungsstarke und flexible Buchhaltungssoftware, die keine Wünsche offenlässt. Durch den Open Source Ansatz bieten wir Ihnen eine zukunftssichere Lösung, die sich kontinuierlich weiterentwickelt und perfekt an Ihre individuellen Anforderungen anpasst.
 
-## Running unit tests
+Starten Sie noch heute mit Kontoras3 und erleben Sie die neue Freiheit in Ihrer Buchhaltung!
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Kontoras3 – Buchhaltung neu gedacht.
 
-## Running end-to-end tests
+# Verwendete Technologien
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+* Angular
+* NodeJS
+* Express
+* Remult
+* Node-Red
+* Clarity Design
