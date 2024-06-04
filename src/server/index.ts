@@ -6,7 +6,7 @@ import session from 'express-session';
 import compression from 'compression';
 import { api } from './api';
 import { auth } from './auth';
-
+import { initNodeRed, nodered } from './node-red';
 const app = express();
 app.use(compression());
 app.use(
@@ -20,4 +20,6 @@ app.use(
 app.use(api);
 app.use(auth);
 
-app.listen(6002, () => console.log('Server started'));
+const server = app.listen(6002, () => console.log('Server started'));
+
+initNodeRed(server, app);
