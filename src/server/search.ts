@@ -4,7 +4,7 @@ import { Document, Id, SimpleDocumentSearchResultSetUnit } from 'flexsearch';
 import { ClassType, remult } from 'remult';
 import { Customer } from '../shared/entities/customer';
 import { promises as fs, existsSync } from 'fs';
-import { AppEntity } from '../shared/entities/app-entity';
+import { SearchableEntity } from '../shared/entities/searchable-entity';
 
 const enableSearchIndexPersistence = true;
 

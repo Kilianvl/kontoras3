@@ -2,7 +2,7 @@ import { Entity, Fields } from 'remult';
 import { deleteEntityIndex, updateEntityIndex } from '../../server/search';
 
 
-@Entity<AppEntity>('AppEntity', {
+@Entity<SearchableEntity>('AppEntity', {
   saved: (entity, e) => {
     console.log('Entity saved', entity);
      updateEntityIndex(entity);
@@ -12,7 +12,7 @@ import { deleteEntityIndex, updateEntityIndex } from '../../server/search';
     await deleteEntityIndex(entity);
   },
 })
-export class AppEntity {
+export class SearchableEntity {
   @Fields.cuid()
   id = '';
 }

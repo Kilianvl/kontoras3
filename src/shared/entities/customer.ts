@@ -1,12 +1,12 @@
 import { Document } from 'flexsearch';
 import { Entity, Fields } from 'remult';
 import { initSearchIndex } from '../../server/search';
-import { AppEntity } from './app-entity';
+import { SearchableEntity } from './searchable-entity';
 
 @Entity('customers', {
   allowApiCrud: true,
 })
-export class Customer extends AppEntity {
+export class Customer extends SearchableEntity {
 
   @Fields.string()
   firstname = '';
