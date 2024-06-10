@@ -8,7 +8,7 @@ import http from 'http';
 const settings = {
   httpAdminRoot:"/red",
   httpNodeRoot: "/api",
-  userDir:"./.nodered/",
+  userDir:"./data/node-red/",
   functionGlobalContext: { }    // enables global context
 };
 
@@ -28,4 +28,5 @@ app.use(nodered);
 
 // Start the runtime
 RED.start();
+
 }
