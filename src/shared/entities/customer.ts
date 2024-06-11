@@ -1,12 +1,13 @@
-import { Document } from 'flexsearch';
-import { Entity, Fields } from 'remult';
-import { initSearchIndex } from '../../server/search';
+import { Fields } from 'remult';
 import { SearchableEntity } from './searchable-entity';
 
-@Entity('customers', {
+@SearchableEntity(Customer, 'customers', {
   allowApiCrud: true,
+  searchFields: ['firstname', 'lastname', 'createdAt']
 })
-export class Customer extends SearchableEntity {
+export class Customer {
+  @Fields.cuid()
+  id = '';
 
   @Fields.string()
   firstname = '';
@@ -20,5 +21,3 @@ export class Customer extends SearchableEntity {
   @Fields.createdAt()
   createdAt?: Date;
 }
-
-initSearchIndex(Customer, ['firstname', 'lastname', 'createdAt']);

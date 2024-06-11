@@ -4,11 +4,12 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build && tsc -p tsconfig.server.json",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "dev": "ng serve --proxy-config proxy.conf.json --open",
-    "dev-node": "tsx watch src/server"
+    "dev-node": "tsx watch src/server",
+    "publish": "nexe dist/server/index.js -o published/kontoras3.exe -t 20.14.0 -b -r \"dist/kontoras3/browser/**/*\""
   },
   "private": true,
   "dependencies": {
@@ -29,7 +30,7 @@
     "express": "^4.19.2",
     "express-session": "^1.18.0",
     "flexsearch": "^0.7.43",
-    "nexe": "github:WuerzburgerMaetschke/nexe",
+
     "node-red": "^3.1.9",
     "remult": "^0.26.13",
     "rxjs": "~7.8.0",
@@ -37,6 +38,7 @@
     "zone.js": "~0.14.3"
   },
   "devDependencies": {
+    "nexe": "github:WuerzburgerMaetschke/nexe",
     "@angular-devkit/build-angular": "^17.3.8",
     "@angular/cli": "^17.3.8",
     "@angular/compiler-cli": "^17.2.0",

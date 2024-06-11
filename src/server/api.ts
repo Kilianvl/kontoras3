@@ -1,13 +1,13 @@
 // src/server/api.ts
 
-import { remultExpress } from 'remult/remult-express';
-import { Customer } from '../shared/entities/customer';
-import * as express from 'express';
 import { hash } from 'bcryptjs';
+import * as express from 'express';
+import { JsonDataProvider } from 'remult';
+import { remultExpress } from 'remult/remult-express';
+import { JsonEntityFileStorage } from 'remult/server';
+import { Customer } from '../shared/entities/customer';
 import { User } from '../shared/entities/user';
 import { initSearch } from './search';
-import { JsonDataProvider } from 'remult';
-import { JsonEntityFileStorage } from 'remult/server';
 
 export const api = remultExpress({
   dataProvider: async () =>

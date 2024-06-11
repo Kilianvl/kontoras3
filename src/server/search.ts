@@ -1,12 +1,21 @@
 import express from 'express';
 
-import { Document, Id, SimpleDocumentSearchResultSetUnit } from 'flexsearch';
+import { Document, SimpleDocumentSearchResultSetUnit } from 'flexsearch';
+import { existsSync, promises as fs } from 'fs';
 import { ClassType, remult } from 'remult';
-import { Customer } from '../shared/entities/customer';
-import { promises as fs, existsSync } from 'fs';
-import { SearchableEntity } from '../shared/entities/searchable-entity';
+import { searchProxy } from '../shared/entities/searchable-entity';
 
 const enableSearchIndexPersistence = true;
+
+searchProxy.updateEntityIndex = async (entity: any) => {
+  updateEntityIndex(entity);
+};
+searchProxy.deleteEntityIndex = async (entity: any) => {
+  deleteEntityIndex(entity);
+};
+searchProxy.initEntityIndex = async (entityType: any, fields: string[]) => {
+  initSearchIndex(entityType, fields);
+};
 
 /**
  * The collection of search indexes.
@@ -41,8 +50,12 @@ export async function initSearch() {
  */
 export async function initSearchIndex<T>(
   entityType: ClassType<T>,
-  fields: (keyof Customer)[]
+  fields: (keyof T)[]
 ) {
+  console.log(
+    `[search] Initializing search index for ${entityType.name}.`
+  );
+
   initSearchIndexFunctions.push(async () => {
     const searchIndexFolder = getSearchIndexFolder(entityType.name);
 
@@ -85,7 +98,7 @@ export async function initSearchIndex<T>(
         index.import(file.replace('.json', ''), data as any);
       }
       indexes[entityType.name] = index;
-      console.log('Index loaded for', entityType.name, fields);
+      console.log('[search] Index successfully loaded for', entityType.name, fields);
     }
     return index;
   });
@@ -161,20 +174,22 @@ search.get('/api/search', async (req, res) => {
       enrich: true, //TODO Sollte entitites zurückgeben, passiert aber nicht.
     });
     if (results.length) {
-      const ergebnis = await Promise.all(results.map(
-        async (
-          value: SimpleDocumentSearchResultSetUnit,
-          index: number,
-          array: SimpleDocumentSearchResultSetUnit[]
-        ) => {
-          return {
-            field: value.field,
-            result: await remult
-              .repo(stringTypeToTypeMap[indexName])
-              .find({ where: { id: { $in: value.result } } }),
-          };
-        }
-      ));
+      const ergebnis = await Promise.all(
+        results.map(
+          async (
+            value: SimpleDocumentSearchResultSetUnit,
+            index: number,
+            array: SimpleDocumentSearchResultSetUnit[]
+          ) => {
+            return {
+              field: value.field,
+              result: await remult
+                .repo(stringTypeToTypeMap[indexName])
+                .find({ where: { id: { $in: value.result } } }),
+            };
+          }
+        )
+      );
       console.log(remult, remult.repo);
       result[indexName.toLowerCase() + 's'] = ergebnis;
     }

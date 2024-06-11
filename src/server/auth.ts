@@ -23,7 +23,7 @@ auth.post('/api/login', async (req, res) => {
     };
 
     if (req.session) {
-      req.session['user'] = userInfo;
+      (req.session as any)['user'] = userInfo;
     }
     res.json(userInfo);
   } else {
@@ -33,14 +33,14 @@ auth.post('/api/login', async (req, res) => {
 
 auth.post('/api/logout', async (req, res) => {
   if (req.session) {
-    req.session['user'] = null;
+    (req.session as any)['user'] = null;
   }
   res.json('logged out');
 });
 
 auth.get('/api/currentUser', async (req, res) => {
   if (req.session) {
-    res.json(req.session['user']);
+    res.json((req.session as any)['user']);
   } else {
     res.json(null);
   }

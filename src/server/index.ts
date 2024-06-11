@@ -4,10 +4,15 @@ import express from 'express';
 import session from 'express-session';
 
 import compression from 'compression';
+import { search } from './search';
 import { api } from './api';
 import { auth } from './auth';
 import { initNodeRed } from './node-red';
-import { search } from './search';
+
+
+
+
+
 const app = express();
 app.use(compression());
 app.use(
