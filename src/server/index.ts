@@ -30,7 +30,11 @@ app
     res
       .status(200)
       .set('content-type', 'text/html; charset=utf-8')
-      .sendFile( path.resolve(path.join(__dirname,'../../../','dist/kontoras3/browser/index.html')));
+      .sendFile(
+        path.resolve(
+          path.join(__dirname, '../../../', 'dist/kontoras3/browser/index.html')
+        )
+      );
   })
   .on('error', (err) => {
     console.error(err);
@@ -38,7 +42,9 @@ app
 
 const server = app.listen(6002, () => {
   console.log('Server started');
-  open('http://localhost:6002');
+  if (!process.argv.includes('--no-open')) {
+    open('http://localhost:6002');
+  }
 });
 
 initNodeRed(server, app);

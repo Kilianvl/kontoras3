@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "dev": "ng serve --proxy-config proxy.conf.json --open",
-    "dev-node": "tsx watch src/server",
+    "dev-node": "tsx watch src/server -- --no-open",
     "publish": "nexe dist/server/index.js -o published/kontoras3.exe -t 20.14.0 -b -r \"dist/kontoras3/browser/**/*\""
   },
   "private": true,
