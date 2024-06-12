@@ -1,0 +1,37 @@
+<div cds-layout="horizontal gap:md align:left" *ngIf="customer">
+  <h1>Kunden bearbeiten: {{ customer.firstname }} {{ customer.lastname }}</h1>
+
+  <div cds-layout="align:right align:vertical-center">
+    <button
+    [routerLink]="['/customers/', customer.id.toString()]"
+    type="button"
+    class="btn btn-icon btn-outline"
+    aria-label="cancel-edit-customer"
+  >
+    Änderungen verwerfen
+    <cds-icon shape="floppy"></cds-icon>
+  </button>
+    <button
+    (click)="saveChanges()"
+      type="button"
+      class="btn btn-icon btn-success"
+      aria-label="save-customer"
+    >
+    Änderungen speichern
+      <cds-icon shape="floppy"></cds-icon>
+    </button>
+  </div>
+</div>
+
+<main *ngIf="customer">
+  <form clrForm clrLayout="horizontal">
+    <clr-input-container>
+      <label>Vorname</label>
+      <input clrInput type="text" [(ngModel)]="customer.firstname" name="firstname" />
+    </clr-input-container>
+    <clr-input-container>
+      <label>Nachname</label>
+      <input clrInput type="text" [(ngModel)]="customer.lastname" name="lastname" />
+    </clr-input-container>
+  </form>
+</main>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLinkActive, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import {
   ClrIconModule,
   ClrNavigationModule,
@@ -14,6 +14,7 @@ import { CustomerComponent } from '../customer/customer.component';
   imports: [
     ClrNavigationModule,
     ClrIconModule,
+    RouterLink,
     RouterLinkActive,
     ClrVerticalNavModule,
     RouterOutlet,
