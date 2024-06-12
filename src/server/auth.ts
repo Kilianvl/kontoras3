@@ -34,6 +34,7 @@ auth.post('/api/login', async (req, res) => {
 auth.post('/api/logout', async (req, res) => {
   if (req.session) {
     (req.session as any)['user'] = null;
+    req.session.destroy(() => {});
   }
   res.json('logged out');
 });

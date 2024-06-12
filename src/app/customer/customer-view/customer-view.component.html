@@ -36,12 +36,12 @@
   <table class="table table-vertical">
     <tbody>
       <tr>
-        <th>Vorname</th>
-        <td>{{customer.firstname}}</td>
+        <th>Person</th>
+        <td>{{customer.salutation}} {{customer.firstname}} {{customer.lastname}} </td>
       </tr>
       <tr>
-        <th>Nachname</th>
-        <td>{{customer.lastname}}</td>
+        <th>Anschrift</th>
+        <td>{{customer.street}} <br/>{{customer.zip}} {{customer.city}}<br/>{{customer.country}} </td>
       </tr>
       <tr>
         <th>Erstellt am</th>

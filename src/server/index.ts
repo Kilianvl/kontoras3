@@ -9,6 +9,10 @@ import { api } from './api';
 import { auth } from './auth';
 import { initNodeRed } from './node-red';
 import open from 'open';
+//var FileStore = require('session-file-store')(session);
+import FileStore  from 'session-file-store';
+const sessionStore = FileStore(session);
+
 
 const app = express();
 app.use(compression());
@@ -17,6 +21,7 @@ app.use(
     secret: '27AD3F06-7582-4443-9680-AB6DBB618E53',
     resave: false,
     saveUninitialized: false,
+    store: new sessionStore({path: 'data/sessions', logFn: () => {}}),
   })
 );
 

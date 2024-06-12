@@ -40,18 +40,4 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
-published/kontoras3.exe
-published/data/db/customers.json
-published/data/db/user.json
-published/data/searchindex/Customer/createdAt.cfg.json
-published/data/searchindex/Customer/createdAt.ctx.json
-published/data/searchindex/Customer/createdAt.map.json
-published/data/searchindex/Customer/firstname.cfg.json
-published/data/searchindex/Customer/firstname.ctx.json
-published/data/searchindex/Customer/firstname.map.json
-published/data/searchindex/Customer/lastname.cfg.json
-published/data/searchindex/Customer/lastname.ctx.json
-published/data/searchindex/Customer/lastname.map.json
-published/data/searchindex/Customer/reg.json
-published/data/searchindex/Customer/store.json
-published/data/searchindex/Customer/tag.json
+published
