@@ -32,10 +32,23 @@
   </div>
 </div>
 
-<main>
-  <div>
-    <pre>{{ customer | json }}</pre>
-  </div>
+<main *ngIf="customer">
+  <table class="table table-vertical">
+    <tbody>
+      <tr>
+        <th>Vorname</th>
+        <td>{{customer.firstname}}</td>
+      </tr>
+      <tr>
+        <th>Nachname</th>
+        <td>{{customer.lastname}}</td>
+      </tr>
+      <tr>
+        <th>Erstellt am</th>
+        <td>{{ customer.createdAt | date : "short" }} Uhr</td>
+      </tr>
+    </tbody>
+  </table>
 </main>
 
 <clr-modal
