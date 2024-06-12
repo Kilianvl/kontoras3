@@ -30,15 +30,14 @@
     "express": "^4.19.2",
     "express-session": "^1.18.0",
     "flexsearch": "^0.7.43",
-
     "node-red": "^3.1.9",
+    "open": "^8.4.2",
     "remult": "^0.26.13",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
   },
   "devDependencies": {
-    "nexe": "github:WuerzburgerMaetschke/nexe",
     "@angular-devkit/build-angular": "^17.3.8",
     "@angular/cli": "^17.3.8",
     "@angular/compiler-cli": "^17.2.0",
@@ -48,12 +47,14 @@
     "@types/express-session": "^1.18.0",
     "@types/flexsearch": "^0.7.6",
     "@types/jasmine": "~5.1.0",
+    "@types/open": "^6.2.1",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "nexe": "github:WuerzburgerMaetschke/nexe",
     "tsx": "^4.11.0",
     "typescript": "~5.4.2"
   }
