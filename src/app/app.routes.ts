@@ -1,31 +1,43 @@
 import { Routes } from '@angular/router';
-import { authGuard } from './auth/auth.guard';
-import { CustomerComponent } from './customer/customer.component';
 import { AuthComponent } from './auth/auth.component';
-import { CustomerViewComponent } from './customer/customer-view/customer-view.component';
-import { CustomerEditComponent } from './customer/customer-edit/customer-edit.component';
+import { authGuard } from './auth/auth.guard';
+import { CrmComponent } from './crm/crm.component';
+import { PersonEditComponent } from './crm/person-edit/person-edit.component';
+import { PersonViewComponent } from './crm/person-view/person-view.component';
+import { CompanyViewComponent } from './crm/company-view/company-view.component';
+import { CompanyEditComponent } from './crm/company-edit/company-edit.component';
 
 export const routes: Routes = [
 
 {
   path: '',
-  redirectTo: 'customers/overview',
+  redirectTo: 'crm/overview',
   pathMatch: 'full'
 },
 {
-  path: 'customers/overview',
+  path: 'crm/overview',
   canActivate: [authGuard],
-  component: CustomerComponent,
+  component: CrmComponent,
 },
 {
-  path: 'customers/:customerId',
+  path: 'crm/person/:id',
   canActivate: [authGuard],
-  component: CustomerViewComponent,
+  component: PersonViewComponent,
 },
 {
-  path: 'customers/:customerId/edit',
+  path: 'crm/person/:id/edit',
   canActivate: [authGuard],
-  component: CustomerEditComponent,
+  component: PersonEditComponent,
+},
+{
+  path: 'crm/company/:id',
+  canActivate: [authGuard],
+  component: CompanyViewComponent,
+},
+{
+  path: 'crm/company/:id/edit',
+  canActivate: [authGuard],
+  component: CompanyEditComponent,
 },
 {
   path: 'login',

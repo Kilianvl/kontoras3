@@ -1,12 +1,14 @@
-<div cds-layout="horizontal gap:md align:left" *ngIf="customer">
-  <h1>Kunde: {{ customer.firstname }} {{ customer.lastname }}</h1>
+<ng-container *ngIf="entity">
+
+<div cds-layout="horizontal gap:md align:left">
+  <h1 *ngIf="">Kunde: {{ entity.displayName }}</h1>
 
   <div cds-layout="align:right align:vertical-center">
     <button
     type="button"
     class="btn btn-icon btn-outline"
-    aria-label="delete-customer"
-    [routerLink]="['/customers/overview']"
+    aria-label="delete-person"
+    [routerLink]="['/crm/overview']"
   >
     Übersicht
     <cds-icon shape="view-list"></cds-icon>
@@ -14,17 +16,17 @@
     <button
       type="button"
       class="btn btn-icon btn-danger"
-      aria-label="delete-customer"
+      aria-label="delete-person"
       (click)="confirmDelete()"
     >
       Kundenlöschen
       <cds-icon shape="trash"></cds-icon>
     </button>
     <a
-      [routerLink]="['/customers/', customer.id.toString(), 'edit']"
+      [routerLink]="['./edit']"
       type="button"
       class="btn btn-icon btn-primary"
-      aria-label="add-customer"
+      aria-label="add-person"
     >
       Kunden bearbeiten
       <cds-icon shape="pencil"></cds-icon>
@@ -32,20 +34,20 @@
   </div>
 </div>
 
-<main *ngIf="customer">
+<main>
   <table class="table table-vertical">
     <tbody>
       <tr>
         <th>Person</th>
-        <td>{{customer.salutation}} {{customer.firstname}} {{customer.lastname}} </td>
+        <td>{{entity.salutation}} {{entity.firstname}} {{entity.lastname}} </td>
       </tr>
       <tr>
         <th>Anschrift</th>
-        <td>{{customer.street}} <br/>{{customer.zip}} {{customer.city}}<br/>{{customer.country}} </td>
+        <td> TODO</td>
       </tr>
       <tr>
         <th>Erstellt am</th>
-        <td>{{ customer.createdAt | date : "short" }} Uhr</td>
+        <td>{{ entity.createdAt | date : "short" }} Uhr</td>
       </tr>
     </tbody>
   </table>
@@ -59,7 +61,7 @@
   <div class="modal-body">
     <b>Achtung!</b>
     <p>
-      Soll der Kunde '{{ customer?.firstname }} {{ customer?.lastname }}'
+      Soll die Person '{{ entity.firstname }} {{ entity.lastname }}'
       wirklich gelöscht werden?
     </p>
   </div>
@@ -71,8 +73,10 @@
     >
       Nein
     </button>
-    <button type="button" class="btn btn-danger" (click)="deleteCustomer()">
+    <button type="button" class="btn btn-danger" (click)="delete()">
       Ja
     </button>
   </div>
 </clr-modal>
+
+</ng-container>

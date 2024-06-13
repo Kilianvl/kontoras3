@@ -1,0 +1,82 @@
+<ng-container *ngIf="entity">
+
+<div cds-layout="horizontal gap:md align:left">
+  <h1 *ngIf="">Kunde: {{ entity.displayName }}</h1>
+
+  <div cds-layout="align:right align:vertical-center">
+    <button
+    type="button"
+    class="btn btn-icon btn-outline"
+    aria-label="delete-company"
+    [routerLink]="['/crm/overview']"
+  >
+    Übersicht
+    <cds-icon shape="view-list"></cds-icon>
+  </button>
+    <button
+      type="button"
+      class="btn btn-icon btn-danger"
+      aria-label="delete-company"
+      (click)="confirmDelete()"
+    >
+      Kundenlöschen
+      <cds-icon shape="trash"></cds-icon>
+    </button>
+    <a
+      [routerLink]="['./edit']"
+      type="button"
+      class="btn btn-icon btn-primary"
+      aria-label="add-company"
+    >
+      Kunden bearbeiten
+      <cds-icon shape="pencil"></cds-icon>
+    </a>
+  </div>
+</div>
+
+<main>
+  <table class="table table-vertical">
+    <tbody>
+      <tr>
+        <th>Company</th>
+        <td>{{entity.name}}</td>
+      </tr>
+      <tr>
+        <th>Anschrift</th>
+        <td> TODO</td>
+      </tr>
+      <tr>
+        <th>Erstellt am</th>
+        <td>{{ entity.createdAt | date : "short" }} Uhr</td>
+      </tr>
+    </tbody>
+  </table>
+</main>
+
+<clr-modal
+  [(clrModalOpen)]="showConfirmDeleteModal"
+  [clrModalStaticBackdrop]="false"
+>
+  <h3 class="modal-title">Kunden löschen</h3>
+  <div class="modal-body">
+    <b>Achtung!</b>
+    <p>
+      Soll die Firma '{{ entity.name }}'
+      wirklich gelöscht werden?
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline"
+      (click)="showConfirmDeleteModal = false"
+    >
+      Nein
+    </button>
+    <button type="button" class="btn btn-danger" (click)="delete()">
+      Ja
+    </button>
+  </div>
+</clr-modal>
+
+</ng-container>

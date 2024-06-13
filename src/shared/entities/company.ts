@@ -26,4 +26,12 @@ export class Company extends Customer {
   @Fields.string({ caption: 'Namenszusatz' })
   nameAddon = '';
 
+
+  get displayName() {
+    return this.name;
+  }
+
+  get customerType() {
+    return 'Company';
+  }
 }

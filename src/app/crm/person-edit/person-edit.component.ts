@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { Customer } from '../../../shared/entities/customer';
+import { Person } from '../../../shared/entities/person';
 import { remult, getValueList, FieldMetadata, FieldValidator } from 'remult';
 import { FormsModule, NgForm } from '@angular/forms';
 import {
@@ -13,7 +13,7 @@ import { Router, RouterLink } from '@angular/router'; // Import the Router modul
 import { AutofieldComponent } from '../../core/autofield/autofield.component';
 
 @Component({
-  selector: 'app-customer-edit',
+  selector: 'app-person-edit',
   standalone: true,
   imports: [
     CommonModule,
@@ -26,15 +26,15 @@ import { AutofieldComponent } from '../../core/autofield/autofield.component';
     JsonPipe,
     RouterLink,
   ],
-  templateUrl: './customer-edit.component.html',
-  styleUrl: './customer-edit.component.scss',
+  templateUrl: './person-edit.component.html',
+  styleUrl: './person-edit.component.scss',
 })
-export class CustomerEditComponent implements OnInit {
-  @Input() customerId!: string;
+export class PersonEditComponent implements OnInit {
+  @Input() id!: string;
 
-  customerRepo = remult.repo(Customer);
-  fields = this.customerRepo.metadata.fields;
-  customer?: Customer;
+  repo = remult.repo(Person);
+  fields = this.repo.metadata.fields;
+  entity?: Person;
 
   @ViewChild('')
   form?: NgForm;
@@ -42,20 +42,18 @@ export class CustomerEditComponent implements OnInit {
   constructor(private router: Router) {} // Initialize the Router module
 
   async ngOnInit() {
-    if (this.customerId == 'new') {
-      console.log('Creating new customer');
-      this.customer = await this.customerRepo.create();
+    if (this.id == 'new') {
+      console.log('Creating new person');
+      this.entity = await this.repo.create();
     } else {
-      this.customer = await this.customerRepo.findId(this.customerId);
+      this.entity = await this.repo.findId(this.id);
     }
-    console.log(this.customerRepo.metadata.fields);
-    console.log(getValueList(this.customerRepo.metadata.fields.salutation!));
   }
 
   async saveChanges() {
-    if (this.customer) {
-      this.customer = await this.customerRepo.save(this.customer);
-      this.router.navigate(['customers/', this.customer.id]); // Use 'this.router' instead of 'router'
+    if (this.entity) {
+      this.entity = await this.repo.save(this.entity);
+      this.router.navigate(['/crm/person/', this.entity.id]); // Use 'this.router' instead of 'router'
     }
   }
 

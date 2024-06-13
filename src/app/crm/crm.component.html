@@ -1,7 +1,7 @@
 <div cds-layout="horizontal gap:md align:left">
   <h1>Kundenübersicht</h1>
 
-  <button [routerLink]="['/customers', 'new', 'edit']"
+  <button [routerLink]="['/crm/person', 'new', 'edit']"
     cds-layout="align:right align:vertical-center"
     type="button"
     class="btn btn-icon btn-primary"
@@ -15,22 +15,24 @@
 <main>
   <clr-datagrid>
     <clr-dg-column style="width: 20px">ID</clr-dg-column>
-    <clr-dg-column [clrDgField]="'firstname'">Vorname</clr-dg-column>
-    <clr-dg-column [clrDgField]="'lastname'">Nachname</clr-dg-column>
-    <clr-dg-column [clrDgField]="'createdAt'" [(clrDgSortOrder)]="sortOrder"
+    <clr-dg-column style="width: 120px" [clrDgField]="'displayName'">Typ</clr-dg-column>
+    <clr-dg-column [clrDgField]="'customerType'">Name</clr-dg-column>
+    <clr-dg-column style="width: 200px" [clrDgField]="'createdAt'" [(clrDgSortOrder)]="sortOrder"
       >Erstellt am</clr-dg-column
     >
-
+    <clr-dg-column style="width: 200px" [clrDgField]="'updatedAt'"
+      >Aktualisiert am</clr-dg-column
+    >
     <clr-dg-row
       *clrDgItems="let customer of customers"
       [clrDgItem]="customer"
-      (click)="openCustomer(customer.id)"
+      (click)="openCustomer(customer)"
     >
       <clr-dg-cell style="width: 20px"
         ><clr-tooltip>
           <cds-icon
             clrTooltipTrigger
-            shape="id-badge"
+            [attr.shape]="customer.customerType === 'Person' ? 'id-badge' : 'building'"
             size="18"
             (click)="copyCustomerId(customer.id)"
           ></cds-icon>
@@ -39,12 +41,13 @@
           </clr-tooltip-content>
         </clr-tooltip></clr-dg-cell
       >
-      <clr-dg-cell>{{ customer.firstname }}</clr-dg-cell>
-      <clr-dg-cell>{{ customer.lastname }}</clr-dg-cell>
+      <clr-dg-cell>{{ customer.customerType}}</clr-dg-cell>
+      <clr-dg-cell>{{ customer.displayName }}</clr-dg-cell>
       <clr-dg-cell>{{ customer.createdAt | date : "short" }} Uhr</clr-dg-cell>
+      <clr-dg-cell>{{ customer.updatedAt | date : "short" }} Uhr</clr-dg-cell>
     </clr-dg-row>
 
-    <clr-dg-footer>{{ customers.length }} users</clr-dg-footer>
+    <clr-dg-footer>{{ customers.length }} Kunden</clr-dg-footer>
   </clr-datagrid>
 </main>
 

@@ -1,0 +1,44 @@
+<ng-container *ngIf="entity">
+  <div cds-layout="horizontal gap:md align:left">
+    <h1>Kunden bearbeiten</h1>
+
+    <div cds-layout="align:right align:vertical-center">
+      <button
+        [routerLink]="entity.id ? ['/crm/company', entity.id.toString()] : ['/crm/overview']"
+        type="button"
+        class="btn btn-icon btn-outline"
+        aria-label="cancel-edit-company"
+      >
+        Änderungen verwerfen
+        <cds-icon shape="floppy"></cds-icon>
+      </button>
+      <button
+        (click)="saveChanges()"
+        [disabled]="form?.form?.invalid"
+        type="button"
+        class="btn btn-icon btn-success"
+        aria-label="save-company"
+      >
+        Änderungen speichern
+        <cds-icon shape="floppy"></cds-icon>
+      </button>
+    </div>
+  </div>
+
+  <main>
+    <form #form="ngForm" clrForm clrLayout="horizontal">
+      <h3>Firmendaten</h3>
+      <app-autofield
+        [field]="fields.name"
+        [(entity)]="entity"
+      ></app-autofield>
+      <h3>Anschrift</h3>
+     <!-- TODO ADD COMPOENNT FOR ADDRESS-->
+      <!-- <app-autofield
+        [field]="fields.archived"
+        [(entity)]="company"
+        helperText="Soll der Kunde archiviert sein?"
+      ></app-autofield> -->
+    </form>
+  </main>
+</ng-container>

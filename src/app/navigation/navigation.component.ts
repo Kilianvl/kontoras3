@@ -5,8 +5,8 @@ import {
   ClrNavigationModule,
   ClrVerticalNavModule,
 } from '@clr/angular';
+import { CrmComponent } from '../crm/crm.component';
 import { HeadComponent } from '../head/head.component';
-import { CustomerComponent } from '../customer/customer.component';
 
 @Component({
   selector: 'app-navigation',
@@ -19,7 +19,7 @@ import { CustomerComponent } from '../customer/customer.component';
     ClrVerticalNavModule,
     RouterOutlet,
     HeadComponent,
-    CustomerComponent,
+    CrmComponent,
   ],
   templateUrl: './navigation.component.html',
   styleUrl: './navigation.component.scss',

@@ -1,6 +1,6 @@
-import { Fields, Relations } from "remult";
-import { Base } from "./base";
-import { Address } from "./address";
+import { Fields, Relations } from 'remult';
+import { Base } from './base';
+import { Address } from './address';
 
 /**
  * Represents a customer entity.
@@ -9,7 +9,6 @@ import { Address } from "./address";
  * Represents a customer entity.
  */
 export abstract class Customer extends Base {
-
   /**
    * The customer number.
    */
@@ -20,6 +19,9 @@ export abstract class Customer extends Base {
    * The addresses associated with the customer.
    */
   @Relations.toMany(() => Address, 'customerId')
-  addresses?: Address[]
+  addresses?: Address[];
 
+  abstract get displayName(): string;
+
+  abstract get customerType(): string;
 }

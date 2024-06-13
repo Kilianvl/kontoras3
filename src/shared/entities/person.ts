@@ -53,4 +53,12 @@ export class Person extends Customer {
    */
   @Fields.string({ caption: 'Position' })
   position = '';
+
+  get displayName() {
+    return this.firstname + ' ' + this.lastname;
+  }
+
+  get customerType() {
+    return 'Person';
+  }
 }
