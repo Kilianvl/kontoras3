@@ -1,20 +1,45 @@
 import { ClassType, Entity, EntityOptions } from 'remult';
 
+/**
+ * An object that provides methods for updating, deleting, and initializing entity indexes.
+ */
 export const searchProxy = {
-  updateEntityIndex: async(entity: any) => { },
+  /**
+   * Updates the entity index.
+   * @param entity - The entity to update the index for.
+   */
+  updateEntityIndex: async (entity: any) => { },
+
+  /**
+   * Deletes the entity index.
+   * @param entity - The entity to delete the index for.
+   */
   deleteEntityIndex: async (entity: any) => { },
+
+  /**
+   * Initializes the entity index.
+   * @param entityType - The type of the entity.
+   * @param fields - The fields to include in the index.
+   */
   initEntityIndex: (entityType: any, fields: string[]) => { },
 };
 
-export function SearchableEntity<T>(entityType: ClassType<T>,
+/**
+ * Decorator function that makes an entity searchable.
+ * @param entityType - The type of the entity.
+ * @param key - The key for the entity.
+ * @param options - The options for the entity.
+ * @returns The decorated entity.
+ */
+export function SearchableEntity<T>(
+  entityType: ClassType<T>,
   key: string,
   options: EntityOptions<
     T extends new (...args: any) => any
       ? InstanceType<T>
       : T
-  > & { searchFields: string[]}
+  > & { searchFields: string[] }
 ) {
-
   searchProxy.initEntityIndex(entityType, options.searchFields);
 
   return Entity(key, {
