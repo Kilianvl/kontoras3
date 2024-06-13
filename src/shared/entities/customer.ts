@@ -1,41 +1,13 @@
-import { Fields, Validators } from 'remult';
-import { SearchableEntity } from './searchable-entity';
+import { Fields, Relations } from "remult";
+import { Base } from "./base";
+import { Address } from "./address";
 
-export const salutations = ['Herr', 'Frau', 'divers'] as const;
-type SalutationType = (typeof salutations)[number];
+export abstract class Customer extends Base {
 
-@SearchableEntity(Customer, 'customers', {
-  allowApiCrud: true,
-  searchFields: ['firstname', 'lastname', 'createdAt'],
-})
-export class Customer {
-  @Fields.cuid()
-  id = '';
+  @Fields.string({ caption: 'Kunden-Nr.' })
+  customerNumber = '';
 
-  @Fields.literal(() => salutations, { allowNull:true, caption: 'Anrede' , inputType: 'select-literal'})
-  salutation?: SalutationType;
+  @Fields.json({ caption: 'Addressen' })
+  addresses?: Address[]
 
-  @Fields.string({ caption: 'Vorname', validate: Validators.required("Der Vorname muss gesetzt werden.") })
-  firstname = '';
-
-  @Fields.string({ caption: 'Nachname', validate: Validators.required  })
-  lastname = '';
-
-  @Fields.string({ caption: 'Straße' })
-  street = '';
-
-  @Fields.string({ caption: 'PLZ' })
-  zip = '';
-
-  @Fields.string({ caption: 'Stadt' })
-  city = '';
-
-  @Fields.string({ caption: 'Land' })
-  country = '';
-
-  @Fields.boolean({ caption: 'Archiviert'})
-  archived = false;
-
-  @Fields.createdAt({ caption: 'Erstellt am', allowApiUpdate: false })
-  createdAt?: Date;
 }
