@@ -1,0 +1,21 @@
+{
+  "VsCodeTaskButtons.tasks": [
+    {
+      "label": "$(run) Frontend",
+      "task": "npm: dev",
+      "tooltip": "Start the frontend server",
+    },
+    {
+      "label": "$(run) Backend",
+      "task": "npm: dev-node",
+      "tooltip": "Start the backend server",
+      "alignment": "left"
+    },
+    {
+      "label": "$(gather) Publish",
+      "task": "npm: publish",
+      "tooltip": "Start the backend server",
+      "alignment": "left"
+    },
+  ]
+}
