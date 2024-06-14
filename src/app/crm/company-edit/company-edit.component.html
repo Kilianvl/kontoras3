@@ -4,7 +4,9 @@
 
     <div cds-layout="align:right align:vertical-center">
       <button
-        [routerLink]="entity.id ? ['/crm/company', entity.id.toString()] : ['/crm/overview']"
+        [routerLink]="
+          entity.id ? ['/crm/company', entity.id.toString()] : ['/crm/overview']
+        "
         type="button"
         class="btn btn-icon btn-outline"
         aria-label="cancel-edit-company"
@@ -24,21 +26,48 @@
       </button>
     </div>
   </div>
+  <button (click)="testSave()" type="button">Test</button>
 
   <main>
     <form #form="ngForm" clrForm clrLayout="horizontal">
       <h3>Firmendaten</h3>
-      <app-autofield
-        [field]="fields.name"
-        [(entity)]="entity"
-      ></app-autofield>
-      <h3>Anschrift</h3>
-     <!-- TODO ADD COMPOENNT FOR ADDRESS-->
-      <!-- <app-autofield
-        [field]="fields.archived"
-        [(entity)]="company"
-        helperText="Soll der Kunde archiviert sein?"
-      ></app-autofield> -->
+      <app-autofield [field]="fields.name" [(entity)]="entity"></app-autofield>
     </form>
+    <div cds-layout="m-t:xl">
+      <clr-tabs >
+        <clr-tab>
+          <button clrTabLink>Adresse</button>
+          <clr-tab-content *clrIfActive="true">
+            <ng-container *ngFor="let address of entity.addresses">
+            <app-address [address]="address"></app-address>
+            </ng-container>
+          </clr-tab-content>
+        </clr-tab>
+        <clr-tab>
+          <button clrTabLink>Kontaktdetails</button>
+          <clr-tab-content *clrIfActive>
+            <p cds-text="body" cds-layout="m-t:md">TODO</p>
+          </clr-tab-content>
+        </clr-tab>
+        <clr-tab>
+          <button clrTabLink>Zahlungsinformationen</button>
+          <clr-tab-content *clrIfActive>
+            <p cds-text="body" cds-layout="m-t:md">TODO</p>
+          </clr-tab-content>
+        </clr-tab>
+        <clr-tab>
+          <button clrTabLink>Konditionen</button>
+          <clr-tab-content *clrIfActive>
+            <p cds-text="body" cds-layout="m-t:md">TODO</p>
+          </clr-tab-content>
+        </clr-tab>
+        <clr-tab>
+          <button clrTabLink>Weiteres</button>
+          <clr-tab-content *clrIfActive>
+            <p cds-text="body" cds-layout="m-t:md">TODO</p>
+          </clr-tab-content>
+        </clr-tab>
+      </clr-tabs>
+    </div>
   </main>
 </ng-container>

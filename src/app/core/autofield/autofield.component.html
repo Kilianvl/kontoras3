@@ -8,10 +8,9 @@
       [(ngModel)]="entity[field.key]"
       [name]="field.key"
     />
-
   </clr-checkbox-wrapper>
-  <clr-control-helper *ngIf="helperText">{{helperText}}</clr-control-helper>
-  <clr-control-error >{{form.form.get(field.key)?.errors}}</clr-control-error>
+  <clr-control-helper *ngIf="helperText">{{ helperText }}</clr-control-helper>
+  <clr-control-error>{{ form.form.get(field.key)?.errors }}</clr-control-error>
 </clr-checkbox-container>
 
 <clr-input-container *ngIf="field.inputType === undefined">
@@ -24,8 +23,8 @@
     [name]="field.key"
     [attr.name]="field.key"
   />
-  <clr-control-helper *ngIf="helperText">{{helperText}}</clr-control-helper>
-  <clr-control-error >{{form.form.get(field.key)?.errors}}</clr-control-error>
+  <clr-control-helper *ngIf="helperText">{{ helperText }}</clr-control-helper>
+  <clr-control-error>{{ form.form.get(field.key)?.errors }}</clr-control-error>
 </clr-input-container>
 
 <clr-select-container *ngIf="field.inputType === 'select-literal'">
@@ -36,9 +35,11 @@
     (blur)="onBlur($event)"
     [(ngModel)]="entity[field.key]"
   >
-    <option *ngFor="let value of getOptionValues(field.key)" [ngValue]="value">{{value}}</option>
-    <option *ngIf="field.options.allowNull" [ngValue]="null">  </option>
+    <option *ngIf="field.options.allowNull" [ngValue]="null"></option>
+    <option *ngFor="let value of getOptionValues(field.key)" [ngValue]="value">
+      {{ value }}
+    </option>
   </select>
-  <clr-control-helper *ngIf="helperText">{{helperText}}</clr-control-helper>
-  <clr-control-error >{{form.form.get(field.key)?.errors}}</clr-control-error>
+  <clr-control-helper *ngIf="helperText">{{ helperText }}</clr-control-helper>
+  <clr-control-error>{{ form.form.get(field.key)?.errors }}</clr-control-error>
 </clr-select-container>

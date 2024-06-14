@@ -18,7 +18,10 @@ export abstract class Customer extends Base {
   /**
    * The addresses associated with the customer.
    */
-  @Relations.toMany(() => Address, 'customerId')
+  @Relations.toMany(() => Address, {
+    field: 'customerId',
+    defaultIncluded: true,
+  })
   addresses?: Address[];
 
   abstract get displayName(): string;
