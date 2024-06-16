@@ -1,9 +1,21 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { Address } from '../../../shared/entities/address';
-import { FieldsMetadata, getEntityRef } from 'remult';
-import { AutofieldComponent } from '../../core/autofield/autofield.component';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Host,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ClrFormsModule } from '@clr/angular';
+import { FieldsMetadata, getEntityRef } from 'remult';
+import { Address } from '../../../shared/entities/address';
+import { AutofieldComponent } from '../../core/autofield/autofield.component';
+import { EditComponent, Penner } from '../../core/edit/edit.component';
+import { Customer } from '../../../shared/entities/customer';
 
 @Component({
   selector: 'app-address',
@@ -12,17 +24,15 @@ import { ClrFormsModule } from '@clr/angular';
   templateUrl: './address.component.html',
   styleUrl: './address.component.scss',
 })
-export class AddressComponent implements OnInit,OnDestroy, AfterViewInit  {
-
-
+export class AddressComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() address!: Address;
   fields!: FieldsMetadata<Address>;
 
-@ViewChild(NgForm) form!: NgForm;
+   @Input() parent!: EditComponent<Customer>;
 
+  @ViewChild(NgForm) form!: NgForm;
 
-@Output() formCreated: EventEmitter<NgForm> = new EventEmitter<NgForm>();
-@Output() formDestroyed: EventEmitter<NgForm> = new EventEmitter<NgForm>();
+  constructor() {}
 
   ngOnInit(): void {
     if (this.address) {
@@ -31,9 +41,9 @@ export class AddressComponent implements OnInit,OnDestroy, AfterViewInit  {
   }
 
   ngAfterViewInit(): void {
-    this.formCreated.emit(this.form);
+    this.parent.registerFormForValidation(this.form);
   }
   ngOnDestroy(): void {
-    this.formDestroyed.emit(this.form);
+    this.parent.deregisterFormForValidation(this.form);
   }
 }

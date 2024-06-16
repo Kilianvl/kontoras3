@@ -7,6 +7,7 @@
       (blur)="onBlur($event)"
       [(ngModel)]="entity[field.key]"
       [name]="field.key"
+      [ngStyle]="{width: width}"
     />
   </clr-checkbox-wrapper>
   <clr-control-helper *ngIf="helperText">{{ helperText }}</clr-control-helper>
@@ -35,6 +36,7 @@
     [name]="field.key"
     (blur)="onBlur($event)"
     [(ngModel)]="entity[field.key]"
+    [ngStyle]="{width: width}"
   >
     <option *ngIf="field.options.allowNull" [ngValue]="null"></option>
     <option *ngFor="let value of getOptionValues(field.key)" [ngValue]="value">

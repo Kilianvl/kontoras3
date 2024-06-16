@@ -7,6 +7,12 @@ import { RepositoryRelations, idType } from 'remult/src/remult3/remult3';
 import { Base } from '../../../shared/entities/base';
 import { NgForm } from '@angular/forms';
 
+
+export interface Penner {
+  registerFormForValidation(form: NgForm): void;
+  deregisterFormForValidation(form: NgForm): void;
+}
+
 @Component({
   selector: 'app-edit',
   standalone: true,
@@ -14,8 +20,9 @@ import { NgForm } from '@angular/forms';
   templateUrl: './edit.component.html',
   styleUrl: './edit.component.scss',
 })
-export abstract class EditComponent<TEntity extends Base> implements OnInit {
+export abstract class EditComponent<TEntity extends Base> implements OnInit, Penner {
   entity?: TEntity;
+  instance?: any;
 
   @Input() id!: idType<TEntity>;
   abstract repo: Repository<TEntity>;
@@ -23,7 +30,9 @@ export abstract class EditComponent<TEntity extends Base> implements OnInit {
   deleteList: (() => Promise<void>)[] = [];
   forms: any = [];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+   this.instance = this;
+  }
 
   async ngOnInit() {
     this.fields = this.repo.metadata.fields;

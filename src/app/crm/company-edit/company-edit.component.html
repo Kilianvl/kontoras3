@@ -39,23 +39,10 @@
         <clr-tab>
           <button clrTabLink>Adresse</button>
           <clr-tab-content *clrIfActive="true">
-            <ng-container *ngFor="let address of entity.addresses">
-              <app-address
+              <app-address *ngFor="let address of entity.addresses"
                 [address]="address"
-                (formCreated)="registerFormForValidation($event)"
-                (formDestroyed)="deregisterFormForValidation($event)"
+                [parent]="instance"
               ></app-address>
-              <button
-                cds-layout="m-t:md"
-                (click)="deleteRelationItem('addresses', address)"
-                type="button"
-                class="btn btn-outline-danger"
-                aria-label="delete-address"
-              >
-                <cds-icon shape="trash"></cds-icon> Adresse entfernen
-              </button>
-            </ng-container>
-
             <button
               cds-layout="m-t:md"
               (click)="createRelationItem('addresses')"
