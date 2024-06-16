@@ -46,5 +46,6 @@ export class CompanyEditComponent extends EditComponent<Company> {
     if (this.entity?.addresses?.length == 0) {
       await this.createRelationItem('addresses');
     }
+    this.repo.relations(this.entity!)
   }
 }

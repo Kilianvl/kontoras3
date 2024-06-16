@@ -1,10 +1,7 @@
-import { Fields, Relations } from 'remult';
+import { Fields, LifecycleEvent, Relations } from 'remult';
 import { Base } from './base';
 import { Address } from './address';
 
-/**
- * Represents a customer entity.
- */
 /**
  * Represents a customer entity.
  */
@@ -22,9 +19,13 @@ export abstract class Customer extends Base {
     field: 'customerId',
     defaultIncluded: true,
   })
-  addresses?: Address[];
+  addresses?: Address[] = [];
 
   abstract get displayName(): string;
 
   abstract get customerType(): string;
+
+  static async onDeleted(entity: Customer, e: LifecycleEvent<Customer>) {
+    await e.relations.addresses.deleteMany({where: {customerId: entity.id}})
+  }
 }

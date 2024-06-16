@@ -1,6 +1,6 @@
 <ng-container *ngIf="entity">
   <div cds-layout="horizontal gap:md align:left">
-    <h1>Kunden bearbeiten</h1>
+    <h1>Firma bearbeiten</h1>
 
     <div cds-layout="align:right align:vertical-center">
       <button
@@ -44,7 +44,7 @@
               <app-address [address]="address"></app-address>
               <button
                 cds-layout="m-t:md"
-                (click)="deleteRelationItem('addresses',address)"
+                (click)="deleteItem(address)"
                 type="button"
                 class="btn btn-danger"
                 aria-label="add-address"

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { ClarityModule, ClrComboboxModule, ClrDatagridModule, ClrDatagridSortOrder } from "@clr/angular";
+import { ClarityModule, ClrComboboxModule, ClrDatagridModule, ClrDatagridSortOrder, ClrDropdownModule } from "@clr/angular";
 import { remult } from 'remult';
 import { Customer } from '../../shared/entities/customer';
 import { Person } from '../../shared/entities/person';
@@ -11,7 +11,7 @@ import { Company } from '../../shared/entities/company';
 @Component({
   selector: 'app-crm',
   standalone: true,
-  imports: [CommonModule, FormsModule,ClarityModule, ClrComboboxModule,ClrDatagridModule,RouterLink],
+  imports: [CommonModule, FormsModule,ClarityModule, ClrComboboxModule,ClrDatagridModule,RouterLink,ClrDropdownModule],
   templateUrl: './crm.component.html',
   styleUrl: './crm.component.scss',
 })

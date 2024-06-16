@@ -8,6 +8,9 @@ type SalutationType = (typeof salutations)[number];
 @SearchableEntity(Person, 'persons', {
   allowApiCrud: true,
   searchFields: ['firstname', 'lastname', 'customerNumber','position'],
+  deleted: async (person, e) => {
+    await Customer.onDeleted(person, e);
+  }
 })
 /**
  * Represents a person entity.

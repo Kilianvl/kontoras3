@@ -2,22 +2,30 @@ import { Fields, Validators } from 'remult';
 import { Customer } from './customer';
 import { SearchableEntity } from './searchable-entity';
 
-
 @SearchableEntity(Company, 'companys', {
   allowApiCrud: true,
   searchFields: ['name', 'customerNumber'],
+  deleted: async (company, e) => {
+      await Customer.onDeleted(company,e);
+  },
 })
 /**
  * Represents a company entity.
  * @extends Customer
  */
 export class Company extends Customer {
-
   /**
    * The name of the organization.
    * @remarks This field is required.
    */
-  @Fields.string({ caption: 'Name der Organisation', validate: [Validators.required('Bitte geben Sie einen Namen für die Organisation ein.')]})
+  @Fields.string({
+    caption: 'Name der Organisation',
+    validate: [
+      Validators.required(
+        'Bitte geben Sie einen Namen für die Organisation ein.'
+      ),
+    ],
+  })
   name = '';
 
   /**
@@ -25,7 +33,6 @@ export class Company extends Customer {
    */
   @Fields.string({ caption: 'Namenszusatz' })
   nameAddon = '';
-
 
   get displayName() {
     return this.name;

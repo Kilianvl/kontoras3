@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
-import { Repository } from 'remult';
+import { Repository, getEntityRef } from 'remult';
 import { getRelationFieldInfo } from 'remult/internals';
 import { RepositoryRelations, idType } from 'remult/src/remult3/remult3';
 import { Base } from '../../../shared/entities/base';
@@ -19,6 +19,7 @@ export abstract class EditComponent<TEntity extends Base> implements OnInit {
   @Input() id!: idType<TEntity>;
   abstract repo: Repository<TEntity>;
   fields: any;
+  deleteList: {item:Base, repo: Repository<unknown>}[] = [];
 
   constructor(private router: Router) {}
 
@@ -35,6 +36,11 @@ export abstract class EditComponent<TEntity extends Base> implements OnInit {
 
   protected async saveChanges() {
     if (this.entity) {
+
+      for (const itemToDelete of this.deleteList) {
+        await itemToDelete.repo.delete(itemToDelete.item);
+      }
+      this.deleteList = [];
       this.entity = await this.saveRelations(this.repo, this.entity);
     }
     this.router.navigate(['/crm/company/', this.entity!.id]);
@@ -91,16 +97,25 @@ export abstract class EditComponent<TEntity extends Base> implements OnInit {
     }
   }
 
+
+
+
   async deleteRelationItem<T extends Base>(key: keyof TEntity, item: T) {
     const relationCollection = this.entity![key] as Base[];
 
     relationCollection.splice(relationCollection.indexOf(item), 1);
-    //TODO: deletes the item immediately, not on save
     if (relationCollection) {
       const relations = this.repo.relations(
         this.entity as TEntity
       ) as RepositoryRelations<TEntity>;
-      (relations[key] as Repository<T>).delete(item.id as idType<T>);
+      // Mark the item for deletion
+      this.deleteList.push({item, repo: (relations[key] as Repository<T>)});
     }
   }
+
+  async deleteItem<T extends Base>(item: T) {
+    const ref = getEntityRef(item);
+    await ref.delete();
+  }
+
 }
