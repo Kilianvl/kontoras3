@@ -35,21 +35,6 @@ export abstract class EditComponent<TEntity extends Base> implements OnInit {
 
   protected async saveChanges() {
     if (this.entity) {
-      //   this.entity = await this.repo.save(this.entity);
-      //   this.router.navigate(['/crm/company/', this.entity.id]);
-
-      //   const fieldNames = Object.getOwnPropertyNames(this.entity).filter(
-      //     (fieldName) => getRelationFieldInfo(this.fields[fieldName])
-      //   );
-
-      //   for (const fieldName of fieldNames) {
-      //     await (
-      //       this.repo.relations(this.entity!)[
-      //         fieldName as keyof RepositoryRelations<TEntity>
-      //       ] as Repository<unknown>
-      //     ).save(this.entity[fieldName as keyof TEntity] as unknown[]);
-      //   }
-      // }
       this.entity = await this.saveRelations(this.repo, this.entity);
     }
     this.router.navigate(['/crm/company/', this.entity!.id]);
@@ -69,19 +54,53 @@ export abstract class EditComponent<TEntity extends Base> implements OnInit {
           fieldName as keyof RepositoryRelations<T>
         ] as Repository<unknown>;
 
-        const subEntities = entity[
-          fieldName as keyof T
-        ] as unknown[];
+        const subEntities = entity[fieldName as keyof T] as unknown[];
 
         for (let index = 0; index < subEntities.length; index++) {
           const subEntity = subEntities[index];
           const subResult = await this.saveRelations(subRepo, subEntity);
           (result[fieldName as keyof T] as unknown[])[index] = subResult;
         }
-
       }
       return result;
     }
     return undefined;
+  }
+
+  async createRelationItem<T extends Base>(key: keyof TEntity) {
+    const relationCollection = this.entity![key] as unknown[];
+
+    if (relationCollection) {
+      const relations = this.repo.relations(
+        this.entity as TEntity
+      ) as RepositoryRelations<TEntity>;
+
+      relationCollection.push((relations[key] as Repository<T>).create());
+    }
+  }
+
+  async deleteRelationItemById<T extends Base>(
+    key: keyof TEntity,
+    id: idType<T>
+  ) {
+    const relationCollection = this.entity![key] as T[];
+
+    const itemToDelete = relationCollection.find((item) => item.id === id);
+    if (itemToDelete) {
+      return this.deleteRelationItem(key, itemToDelete);
+    }
+  }
+
+  async deleteRelationItem<T extends Base>(key: keyof TEntity, item: T) {
+    const relationCollection = this.entity![key] as Base[];
+
+    relationCollection.splice(relationCollection.indexOf(item), 1);
+    //TODO: deletes the item immediately, not on save
+    if (relationCollection) {
+      const relations = this.repo.relations(
+        this.entity as TEntity
+      ) as RepositoryRelations<TEntity>;
+      (relations[key] as Repository<T>).delete(item.id as idType<T>);
+    }
   }
 }

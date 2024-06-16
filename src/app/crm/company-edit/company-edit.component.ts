@@ -14,6 +14,7 @@ import { Company } from '../../../shared/entities/company';
 import { AutofieldComponent } from '../../core/autofield/autofield.component';
 import { EditComponent } from '../../core/edit/edit.component';
 import { AddressComponent } from '../address/address.component';
+import { Address } from '../../../shared/entities/address';
 
 @Component({
   selector: 'app-company-edit',
@@ -29,7 +30,7 @@ import { AddressComponent } from '../address/address.component';
     ClrTabsModule,
     JsonPipe,
     RouterLink,
-    AddressComponent
+    AddressComponent,
   ],
   templateUrl: './company-edit.component.html',
   styleUrl: './company-edit.component.scss',
@@ -40,13 +41,10 @@ export class CompanyEditComponent extends EditComponent<Company> {
   constructor(router: Router) {
     super(router);
   }
-
-  async testSave() {
-    console.log('Save');
-    this.entity!.addresses![0].city = 'New York';
-    this.entity!.name = 'New Name';
-    //await this.repo.relations(this.entity!)
-
+  override async ngOnInit(): Promise<void> {
+    await super.ngOnInit();
+    if (this.entity?.addresses?.length == 0) {
+      await this.createRelationItem('addresses');
+    }
   }
 }
-

@@ -26,7 +26,6 @@
       </button>
     </div>
   </div>
-  <button (click)="testSave()" type="button">Test</button>
 
   <main>
     <form #form="ngForm" clrForm clrLayout="horizontal">
@@ -34,13 +33,35 @@
       <app-autofield [field]="fields.name" [(entity)]="entity"></app-autofield>
     </form>
     <div cds-layout="m-t:xl">
-      <clr-tabs >
+      <clr-tabs>
         <clr-tab>
           <button clrTabLink>Adresse</button>
           <clr-tab-content *clrIfActive="true">
-            <ng-container *ngFor="let address of entity.addresses">
-            <app-address [address]="address"></app-address>
+            <ng-container
+              cds-layout="horizontal"
+              *ngFor="let address of entity.addresses"
+            >
+              <app-address [address]="address"></app-address>
+              <button
+                cds-layout="m-t:md"
+                (click)="deleteRelationItem('addresses',address)"
+                type="button"
+                class="btn btn-danger"
+                aria-label="add-address"
+              >
+                <cds-icon shape="trash"></cds-icon>
+              </button>
             </ng-container>
+
+            <button
+              cds-layout="m-t:md"
+              (click)="createRelationItem('addresses')"
+              type="button"
+              class="btn btn-outline"
+              aria-label="add-address"
+            >
+              Adresse hinzufügen
+            </button>
           </clr-tab-content>
         </clr-tab>
         <clr-tab>
