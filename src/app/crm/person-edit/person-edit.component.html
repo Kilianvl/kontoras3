@@ -4,13 +4,14 @@
 
     <div cds-layout="align:right align:vertical-center">
       <button
-        [routerLink]="entity.id ? ['/crm/person', entity.id.toString()] : ['/crm/overview']"
+        [routerLink]="
+          entity.id ? ['/crm/person', entity.id.toString()] : ['/crm/overview']
+        "
         type="button"
         class="btn btn-icon btn-outline"
         aria-label="cancel-edit-person"
       >
-        Änderungen verwerfen
-        <cds-icon shape="floppy"></cds-icon>
+        <cds-icon shape="undo"></cds-icon>Änderungen verwerfen
       </button>
       <button
         (click)="saveChanges()"
@@ -19,8 +20,7 @@
         class="btn btn-icon btn-success"
         aria-label="save-person"
       >
-        Änderungen speichern
-        <cds-icon shape="floppy"></cds-icon>
+        <cds-icon shape="floppy"></cds-icon>Änderungen speichern
       </button>
     </div>
   </div>
@@ -41,7 +41,7 @@
         [(entity)]="entity"
       ></app-autofield>
       <h3>Anschrift</h3>
-     <!-- TODO ADD COMPOENNT FOR ADDRESS-->
+      <!-- TODO ADD COMPOENNT FOR ADDRESS-->
       <!-- <app-autofield
         [field]="fields.archived"
         [(entity)]="person"

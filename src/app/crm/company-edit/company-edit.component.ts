@@ -48,4 +48,6 @@ export class CompanyEditComponent extends EditComponent<Company> {
     }
     this.repo.relations(this.entity!)
   }
+
+
 }

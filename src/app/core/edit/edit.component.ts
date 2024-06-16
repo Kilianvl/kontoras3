@@ -2,9 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
 import { Repository, getEntityRef } from 'remult';
-import { getRelationFieldInfo } from 'remult/internals';
+import { RelationFieldInfo, getRelationFieldInfo } from 'remult/internals';
 import { RepositoryRelations, idType } from 'remult/src/remult3/remult3';
 import { Base } from '../../../shared/entities/base';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-edit',
@@ -19,7 +20,8 @@ export abstract class EditComponent<TEntity extends Base> implements OnInit {
   @Input() id!: idType<TEntity>;
   abstract repo: Repository<TEntity>;
   fields: any;
-  deleteList: {item:Base, repo: Repository<unknown>}[] = [];
+  deleteList: (() => Promise<void>)[] = [];
+  forms: any = [];
 
   constructor(private router: Router) {}
 
@@ -36,9 +38,8 @@ export abstract class EditComponent<TEntity extends Base> implements OnInit {
 
   protected async saveChanges() {
     if (this.entity) {
-
-      for (const itemToDelete of this.deleteList) {
-        await itemToDelete.repo.delete(itemToDelete.item);
+      for (const deleteFunc of this.deleteList) {
+        await deleteFunc();
       }
       this.deleteList = [];
       this.entity = await this.saveRelations(this.repo, this.entity);
@@ -46,26 +47,37 @@ export abstract class EditComponent<TEntity extends Base> implements OnInit {
     this.router.navigate(['/crm/company/', this.entity!.id]);
   }
 
-  async saveRelations<T>(repo: Repository<T>, entity: T) {
+  async saveRelations<T extends Base>(repo: Repository<T>, entity: T) {
     if (entity) {
       const result = await repo.save(entity);
+      entity.id = result.id;
 
-      const fieldNames = Object.getOwnPropertyNames(entity).filter(
-        (fieldName) =>
-          getRelationFieldInfo(repo.metadata.fields[fieldName as keyof T])
-      );
+      const relationFields = Object.getOwnPropertyNames(entity)
+        .map((fieldName) => {
+          const info = getRelationFieldInfo(
+            repo.metadata.fields[fieldName as keyof T]
+          );
+          return { fieldName, info };
+        })
+        .filter((x) => x.info) as {
+        fieldName: string;
+        info: RelationFieldInfo;
+      }[];
 
-      for (const fieldName of fieldNames) {
+      for (const relationField of relationFields) {
         const subRepo = repo.relations(entity)[
-          fieldName as keyof RepositoryRelations<T>
-        ] as Repository<unknown>;
-
-        const subEntities = entity[fieldName as keyof T] as unknown[];
+          relationField.fieldName as keyof RepositoryRelations<T>
+        ] as Repository<Base>;
+        const subEntities = entity[
+          relationField.fieldName as keyof T
+        ] as Base[];
 
         for (let index = 0; index < subEntities.length; index++) {
           const subEntity = subEntities[index];
+          (subEntity as any)[relationField.info.options.field!] = entity.id;
           const subResult = await this.saveRelations(subRepo, subEntity);
-          (result[fieldName as keyof T] as unknown[])[index] = subResult;
+          (result[relationField.fieldName as keyof T] as unknown[])[index] =
+            subResult;
         }
       }
       return result;
@@ -85,37 +97,26 @@ export abstract class EditComponent<TEntity extends Base> implements OnInit {
     }
   }
 
-  async deleteRelationItemById<T extends Base>(
-    key: keyof TEntity,
-    id: idType<T>
-  ) {
-    const relationCollection = this.entity![key] as T[];
-
-    const itemToDelete = relationCollection.find((item) => item.id === id);
-    if (itemToDelete) {
-      return this.deleteRelationItem(key, itemToDelete);
-    }
-  }
-
-
-
-
   async deleteRelationItem<T extends Base>(key: keyof TEntity, item: T) {
     const relationCollection = this.entity![key] as Base[];
-
     relationCollection.splice(relationCollection.indexOf(item), 1);
-    if (relationCollection) {
-      const relations = this.repo.relations(
-        this.entity as TEntity
-      ) as RepositoryRelations<TEntity>;
-      // Mark the item for deletion
-      this.deleteList.push({item, repo: (relations[key] as Repository<T>)});
-    }
+
+    this.deleteList.push(async () => {
+      await getEntityRef(item).delete();
+    });
   }
 
-  async deleteItem<T extends Base>(item: T) {
-    const ref = getEntityRef(item);
-    await ref.delete();
+  registerFormForValidation(form: NgForm) {
+    this.forms.push(form);
+    console.log('FORMS!!!', this.forms);
+  }
+  deregisterFormForValidation(form: NgForm) {
+    const index = this.forms.indexOf(form);
+    this.forms.splice(index, 1);
+    console.log('FORMS!!!', this.forms);
   }
 
+  hasInvalidForms() {
+    return this.forms.find((form: NgForm) => form.invalid);
+  }
 }

@@ -1,4 +1,4 @@
-import { Fields, Relations } from 'remult';
+import { Fields, Relations, Validators } from 'remult';
 import { Base } from './base';
 import { SearchableEntity } from './searchable-entity';
 import { Customer } from './customer';
@@ -24,7 +24,7 @@ export class Address extends Base {
   /**
    * The street of the address.
    */
-  @Fields.string({ caption: 'Straße' })
+  @Fields.string({ caption: 'Straße', validate: Validators.required })
   street = '';
 
   /**

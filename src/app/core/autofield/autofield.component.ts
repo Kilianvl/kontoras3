@@ -31,6 +31,9 @@ import { FieldMetadata, getEntityRef, getValueList } from 'remult';
 })
 export class AutofieldComponent {
   @Input()
+  width: string = 'auto';
+
+  @Input()
   entity!: any;
 
   @Output()

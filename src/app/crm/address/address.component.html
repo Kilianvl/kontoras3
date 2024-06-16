@@ -1,8 +1,7 @@
 <form #form="ngForm" clrForm clrLayout="horizontal">
-  <app-autofield [field]="fields.street" [(entity)]="address"></app-autofield>
-  <app-autofield [field]="fields.zip" [(entity)]="address"></app-autofield>
-  <app-autofield [field]="fields.city" [(entity)]="address"></app-autofield>
-  <app-autofield [field]="fields.country" [(entity)]="address"></app-autofield>
-  <app-autofield [field]="fields.street" [(entity)]="address"></app-autofield>
+  <app-autofield [field]="fields.street" width="250px" [(entity)]="address"></app-autofield>
+  <app-autofield [field]="fields.zip" width="90px" [(entity)]="address"></app-autofield>
+  <app-autofield [field]="fields.city" width="250px" [(entity)]="address"></app-autofield>
+  <app-autofield [field]="fields.country" width="200px" [(entity)]="address"></app-autofield>
   <app-autofield [field]="fields.addressType!" [(entity)]="address"></app-autofield>
 </form>

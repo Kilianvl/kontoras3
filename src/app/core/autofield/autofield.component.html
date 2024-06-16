@@ -22,6 +22,7 @@
     [(ngModel)]="entity[field.key]"
     [name]="field.key"
     [attr.name]="field.key"
+    [ngStyle]="{width: width}"
   />
   <clr-control-helper *ngIf="helperText">{{ helperText }}</clr-control-helper>
   <clr-control-error>{{ form.form.get(field.key)?.errors }}</clr-control-error>

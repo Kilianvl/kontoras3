@@ -11,18 +11,16 @@
         class="btn btn-icon btn-outline"
         aria-label="cancel-edit-company"
       >
-        Änderungen verwerfen
-        <cds-icon shape="floppy"></cds-icon>
+        <cds-icon shape="undo"></cds-icon>Änderungen verwerfen
       </button>
       <button
         (click)="saveChanges()"
-        [disabled]="form?.form?.invalid"
+        [disabled]="form?.form?.invalid || hasInvalidForms()"
         type="button"
         class="btn btn-icon btn-success"
         aria-label="save-company"
       >
-        Änderungen speichern
-        <cds-icon shape="floppy"></cds-icon>
+        <cds-icon shape="floppy"></cds-icon>Änderungen speichern
       </button>
     </div>
   </div>
@@ -30,26 +28,31 @@
   <main>
     <form #form="ngForm" clrForm clrLayout="horizontal">
       <h3>Firmendaten</h3>
-      <app-autofield [field]="fields.name" [(entity)]="entity"></app-autofield>
+      <app-autofield
+        [field]="fields.name"
+        width="400px"
+        [(entity)]="entity"
+      ></app-autofield>
     </form>
     <div cds-layout="m-t:xl">
       <clr-tabs>
         <clr-tab>
           <button clrTabLink>Adresse</button>
           <clr-tab-content *clrIfActive="true">
-            <ng-container
-              cds-layout="horizontal"
-              *ngFor="let address of entity.addresses"
-            >
-              <app-address [address]="address"></app-address>
+            <ng-container *ngFor="let address of entity.addresses">
+              <app-address
+                [address]="address"
+                (formCreated)="registerFormForValidation($event)"
+                (formDestroyed)="deregisterFormForValidation($event)"
+              ></app-address>
               <button
                 cds-layout="m-t:md"
-                (click)="deleteItem(address)"
+                (click)="deleteRelationItem('addresses', address)"
                 type="button"
-                class="btn btn-danger"
-                aria-label="add-address"
+                class="btn btn-outline-danger"
+                aria-label="delete-address"
               >
-                <cds-icon shape="trash"></cds-icon>
+                <cds-icon shape="trash"></cds-icon> Adresse entfernen
               </button>
             </ng-container>
 
@@ -60,7 +63,7 @@
               class="btn btn-outline"
               aria-label="add-address"
             >
-              Adresse hinzufügen
+              <cds-icon shape="plus"></cds-icon> Adresse hinzufügen
             </button>
           </clr-tab-content>
         </clr-tab>

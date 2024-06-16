@@ -13,12 +13,27 @@
 
   <clr-dropdown cds-layout="align:right align:vertical-center">
     <button class="btn btn-primary" clrDropdownTrigger>
-      Kunden hinzufügen
-      <cds-icon shape="angle" direction="down"></cds-icon>
+      <cds-icon shape="angle" direction="down"></cds-icon>Kunden hinzufügen
     </button>
     <clr-dropdown-menu clrPosition="bottom-left" *clrIfOpen>
-      <div aria-label="Person" clrDropdownItem style="font-size:20px"cds-layout="p-y:xs"  [routerLink]="['/crm/person', 'new', 'edit']"><cds-icon size="md" shape="id-badge"></cds-icon>Person</div>
-      <div aria-label="Firma" clrDropdownItem style="font-size:20px" cds-layout="p-y:xs" [routerLink]="['/crm/company', 'new', 'edit']"><cds-icon size="md" shape="building"></cds-icon>Firma</div>
+      <div
+        aria-label="Person"
+        clrDropdownItem
+        style="font-size: 20px"
+        cds-layout="p-y:xs"
+        [routerLink]="['/crm/person', 'new', 'edit']"
+      >
+        <cds-icon size="md" shape="id-badge"></cds-icon>Person
+      </div>
+      <div
+        aria-label="Firma"
+        clrDropdownItem
+        style="font-size: 20px"
+        cds-layout="p-y:xs"
+        [routerLink]="['/crm/company', 'new', 'edit']"
+      >
+        <cds-icon size="md" shape="building"></cds-icon>Firma
+      </div>
     </clr-dropdown-menu>
   </clr-dropdown>
 </div>
