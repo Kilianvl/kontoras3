@@ -39,10 +39,10 @@
         <clr-tab>
           <button clrTabLink>Adresse</button>
           <clr-tab-content *clrIfActive="true">
-              <app-address *ngFor="let address of entity.addresses"
+              <app-address-edit *ngFor="let address of entity.addresses"
                 [address]="address"
                 [parent]="instance"
-              ></app-address>
+              ></app-address-edit>
             <button
               cds-layout="m-t:md"
               (click)="createRelationItem('addresses')"

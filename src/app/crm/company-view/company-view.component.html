@@ -47,6 +47,10 @@
         </tr>
       </tbody>
     </table>
+
+
+    <app-address-view *ngFor="let address of entity.addresses" [address]="address" [entity]="entity"></app-address-view>
+
   </main>
 
   <clr-modal

@@ -13,7 +13,7 @@ import { remult } from 'remult';
 import { Company } from '../../../shared/entities/company';
 import { AutofieldComponent } from '../../core/autofield/autofield.component';
 import { EditComponent } from '../../core/edit/edit.component';
-import { AddressComponent } from '../address/address.component';
+import { AddressEditComponent } from '../address/address-edit.component';
 import { Address } from '../../../shared/entities/address';
 
 @Component({
@@ -30,7 +30,7 @@ import { Address } from '../../../shared/entities/address';
     ClrTabsModule,
     JsonPipe,
     RouterLink,
-    AddressComponent,
+    AddressEditComponent,
   ],
   templateUrl: './company-edit.component.html',
   styleUrl: './company-edit.component.scss',

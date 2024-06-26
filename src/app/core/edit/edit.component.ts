@@ -7,8 +7,7 @@ import { RepositoryRelations, idType } from 'remult/src/remult3/remult3';
 import { Base } from '../../../shared/entities/base';
 import { NgForm } from '@angular/forms';
 
-
-export interface Penner {
+export interface RelationFormValidator {
   registerFormForValidation(form: NgForm): void;
   deregisterFormForValidation(form: NgForm): void;
 }
@@ -20,7 +19,9 @@ export interface Penner {
   templateUrl: './edit.component.html',
   styleUrl: './edit.component.scss',
 })
-export abstract class EditComponent<TEntity extends Base> implements OnInit, Penner {
+export abstract class EditComponent<TEntity extends Base>
+  implements OnInit, RelationFormValidator
+{
   entity?: TEntity;
   instance?: any;
 
@@ -31,17 +32,22 @@ export abstract class EditComponent<TEntity extends Base> implements OnInit, Pen
   forms: any = [];
 
   constructor(private router: Router) {
-   this.instance = this;
+    this.instance = this;
   }
 
   async ngOnInit() {
+    // Set the 'fields' property to the metadata fields of the repository
     this.fields = this.repo.metadata.fields;
 
+    // Check if the id is 'new'
     if (this.id == 'new') {
+      // If it is, create a new entity using the repository's create method
       this.entity = await this.repo.create();
     } else {
+      // If it's not 'new', find the entity with the given id using the repository's findId method
       this.entity = await this.repo.findId(this.id);
     }
+    // Log the entity to the console
     console.log('Entity:', this.entity);
   }
 
@@ -110,9 +116,11 @@ export abstract class EditComponent<TEntity extends Base> implements OnInit, Pen
     const relationCollection = this.entity![key] as Base[];
     relationCollection.splice(relationCollection.indexOf(item), 1);
 
-    this.deleteList.push(async () => {
-      await getEntityRef(item).delete();
-    });
+    if (item.id) {
+      this.deleteList.push(async () => {
+        await getEntityRef(item).delete();
+      });
+    }
   }
 
   registerFormForValidation(form: NgForm) {

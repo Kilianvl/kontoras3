@@ -6,11 +6,12 @@ import { Router, RouterLink } from '@angular/router';
 import { CommonModule, JsonPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ClarityModule } from '@clr/angular';
+import { AddressViewComponent } from '../address-view/address-view.component';
 
 @Component({
   selector: 'app-company-view',
   standalone: true,
-  imports: [CommonModule, FormsModule, ClarityModule, JsonPipe, RouterLink],
+  imports: [CommonModule, FormsModule, ClarityModule, JsonPipe, RouterLink, AddressViewComponent],
   templateUrl: './company-view.component.html',
   styleUrl: './company-view.component.scss',
 })

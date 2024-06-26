@@ -14,17 +14,17 @@ import { ClrFormsModule } from '@clr/angular';
 import { FieldsMetadata, getEntityRef } from 'remult';
 import { Address } from '../../../shared/entities/address';
 import { AutofieldComponent } from '../../core/autofield/autofield.component';
-import { EditComponent, Penner } from '../../core/edit/edit.component';
+import { EditComponent, RelationFormValidator } from '../../core/edit/edit.component';
 import { Customer } from '../../../shared/entities/customer';
 
 @Component({
-  selector: 'app-address',
+  selector: 'app-address-edit',
   standalone: true,
   imports: [AutofieldComponent, FormsModule, ClrFormsModule],
-  templateUrl: './address.component.html',
-  styleUrl: './address.component.scss',
+  templateUrl: './address-edit.component.html',
+  styleUrl: './address-edit.component.scss',
 })
-export class AddressComponent implements OnInit, OnDestroy, AfterViewInit {
+export class AddressEditComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() address!: Address;
   fields!: FieldsMetadata<Address>;
 

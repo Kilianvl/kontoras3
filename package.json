@@ -30,6 +30,7 @@
     "express": "^4.19.2",
     "express-session": "^1.18.0",
     "flexsearch": "^0.7.43",
+    "ngx-toastr": "^19.0.0",
     "node-red": "^3.1.9",
     "open": "^8.4.2",
     "remult": "^0.26.13",
