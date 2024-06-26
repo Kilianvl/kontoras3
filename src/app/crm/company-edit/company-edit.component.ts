@@ -38,6 +38,7 @@ import { Address } from '../../../shared/entities/address';
 export class CompanyEditComponent extends EditComponent<Company> {
   override repo = remult.repo(Company);
 
+  override rootPath = '/crm/company/';
   constructor(router: Router) {
     super(router);
   }

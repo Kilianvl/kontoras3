@@ -25,6 +25,8 @@ export abstract class EditComponent<TEntity extends Base>
   entity?: TEntity;
   instance?: any;
 
+  abstract rootPath: string;
+
   @Input() id!: idType<TEntity>;
   abstract repo: Repository<TEntity>;
   fields: any;
@@ -59,7 +61,7 @@ export abstract class EditComponent<TEntity extends Base>
       this.deleteList = [];
       this.entity = await this.saveRelations(this.repo, this.entity);
     }
-    this.router.navigate(['/crm/company/', this.entity!.id]);
+    this.router.navigate([this.rootPath, this.entity!.id]);
   }
 
   async saveRelations<T extends Base>(repo: Repository<T>, entity: T) {

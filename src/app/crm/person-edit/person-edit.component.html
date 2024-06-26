@@ -48,5 +48,51 @@
         helperText="Soll der Kunde archiviert sein?"
       ></app-autofield> -->
     </form>
+    <div cds-layout="m-t:xl">
+      <clr-tabs>
+        <clr-tab>
+          <button clrTabLink>Adresse</button>
+          <clr-tab-content *clrIfActive="true">
+              <app-address-edit *ngFor="let address of entity.addresses"
+                [address]="address"
+                [parent]="instance"
+              ></app-address-edit>
+            <button
+              cds-layout="m-t:md"
+              (click)="createRelationItem('addresses')"
+              type="button"
+              class="btn btn-outline"
+              aria-label="add-address"
+            >
+              <cds-icon shape="plus"></cds-icon> Adresse hinzufügen
+            </button>
+          </clr-tab-content>
+        </clr-tab>
+        <clr-tab>
+          <button clrTabLink>Kontaktdetails</button>
+          <clr-tab-content *clrIfActive>
+            <p cds-text="body" cds-layout="m-t:md">TODO</p>
+          </clr-tab-content>
+        </clr-tab>
+        <clr-tab>
+          <button clrTabLink>Zahlungsinformationen</button>
+          <clr-tab-content *clrIfActive>
+            <p cds-text="body" cds-layout="m-t:md">TODO</p>
+          </clr-tab-content>
+        </clr-tab>
+        <clr-tab>
+          <button clrTabLink>Konditionen</button>
+          <clr-tab-content *clrIfActive>
+            <p cds-text="body" cds-layout="m-t:md">TODO</p>
+          </clr-tab-content>
+        </clr-tab>
+        <clr-tab>
+          <button clrTabLink>Weiteres</button>
+          <clr-tab-content *clrIfActive>
+            <p cds-text="body" cds-layout="m-t:md">TODO</p>
+          </clr-tab-content>
+        </clr-tab>
+      </clr-tabs>
+    </div>
   </main>
 </ng-container>

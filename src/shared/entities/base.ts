@@ -27,4 +27,5 @@ export abstract class Base {
    */
   @Fields.boolean({ caption: 'Archiviert' })
   archived = false;
+
 }
