@@ -8,10 +8,11 @@
       [(ngModel)]="entity[field.key]"
       [name]="field.key"
       [ngStyle]="{width: width}"
+      [placeholder]="placeholder"
     />
   </clr-checkbox-wrapper>
-  <clr-control-helper *ngIf="helperText">{{ helperText }}</clr-control-helper>
   <clr-control-error>{{ form.form.get(field.key)?.errors }}</clr-control-error>
+  <clr-control-helper *ngIf="helperText" [innerHTML]="helperText"></clr-control-helper>
 </clr-checkbox-container>
 
 <clr-input-container *ngIf="field.inputType === undefined">
@@ -24,9 +25,26 @@
     [name]="field.key"
     [attr.name]="field.key"
     [ngStyle]="{width: width}"
+    [placeholder]="placeholder"
   />
-  <clr-control-helper *ngIf="helperText">{{ helperText }}</clr-control-helper>
   <clr-control-error>{{ form.form.get(field.key)?.errors }}</clr-control-error>
+  <clr-control-helper *ngIf="helperText" [innerHTML]="helperText"></clr-control-helper>
+</clr-input-container>
+
+<clr-input-container *ngIf="field.inputType === 'number'">
+  <label>{{ field.caption }}</label>
+  <input
+    clrInput
+    type="number"
+    (blur)="onBlur($event)"
+    [(ngModel)]="entity[field.key]"
+    [name]="field.key"
+    [attr.name]="field.key"
+    [ngStyle]="{width: width}"
+    [placeholder]="placeholder"
+  />
+  <clr-control-error>{{ form.form.get(field.key)?.errors }}</clr-control-error>
+  <clr-control-helper *ngIf="helperText" [innerHTML]="helperText"></clr-control-helper>
 </clr-input-container>
 
 <clr-select-container *ngIf="field.inputType === 'select-literal'">
@@ -43,6 +61,6 @@
       {{ value }}
     </option>
   </select>
-  <clr-control-helper *ngIf="helperText">{{ helperText }}</clr-control-helper>
   <clr-control-error>{{ form.form.get(field.key)?.errors }}</clr-control-error>
+  <clr-control-helper *ngIf="helperText">{{ helperText }}</clr-control-helper>
 </clr-select-container>

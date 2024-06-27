@@ -8,6 +8,15 @@ import { SearchableEntity } from './searchable-entity';
   deleted: async (company, e) => {
       await Customer.onDeleted(company,e);
   },
+  saving: async (entity, event) => {
+      if (!entity.customerNumber) {
+        entity.sequenceNumber = await entity.createSequenceNumber();
+        entity.customerNumber = await entity.createCustomerNumber(entity.sequenceNumber);
+        if (await event.repository.findOne({ where: { customerNumber: entity.customerNumber } })) {
+          throw new Error('Kundennummer bereits vergeben');
+        }
+      }
+  },
 })
 /**
  * Represents a company entity.

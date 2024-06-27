@@ -38,6 +38,8 @@ import { Address } from '../../../shared/entities/address';
 export class CompanyEditComponent extends EditComponent<Company> {
   override repo = remult.repo(Company);
 
+  previewCustomerNumber: string = '';
+
   override rootPath = '/crm/company/';
   constructor(router: Router) {
     super(router);
@@ -47,8 +49,8 @@ export class CompanyEditComponent extends EditComponent<Company> {
     if (this.entity?.addresses?.length == 0) {
       await this.createRelationItem('addresses');
     }
-    this.repo.relations(this.entity!)
+    this.repo.relations(this.entity!);
+    this.previewCustomerNumber = await this.entity!.previewCustomerNumber();
   }
-
 
 }

@@ -10,7 +10,13 @@ type SalutationType = (typeof salutations)[number];
   searchFields: ['firstname', 'lastname', 'customerNumber','position'],
   deleted: async (person, e) => {
     await Customer.onDeleted(person, e);
-  }
+  },
+  saving: async (entity, event) => {
+      if (!entity.customerNumber) {
+        entity.sequenceNumber = await entity.createSequenceNumber();
+        entity.customerNumber = await entity.createCustomerNumber(entity.sequenceNumber);
+      }
+  },
 })
 /**
  * Represents a person entity.

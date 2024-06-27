@@ -6,6 +6,7 @@ import { PersonEditComponent } from './crm/person-edit/person-edit.component';
 import { PersonViewComponent } from './crm/person-view/person-view.component';
 import { CompanyViewComponent } from './crm/company-view/company-view.component';
 import { CompanyEditComponent } from './crm/company-edit/company-edit.component';
+import { NumberRangesComponent } from './settings/number-ranges.component';
 
 export const routes: Routes = [
 
@@ -38,6 +39,11 @@ export const routes: Routes = [
   path: 'crm/company/:id/edit',
   canActivate: [authGuard],
   component: CompanyEditComponent,
+},
+{
+  path: 'settings/number-ranges',
+  canActivate: [authGuard],
+  component: NumberRangesComponent,
 },
 {
   path: 'login',

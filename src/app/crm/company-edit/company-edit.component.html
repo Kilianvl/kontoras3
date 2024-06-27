@@ -33,6 +33,12 @@
         width="400px"
         [(entity)]="entity"
       ></app-autofield>
+      <app-autofield
+        [field]="fields.customerNumber"
+        width="400px"
+        [(entity)]="entity"
+        [placeholder]="previewCustomerNumber"
+      ></app-autofield>
     </form>
     <div cds-layout="m-t:xl">
       <clr-tabs>

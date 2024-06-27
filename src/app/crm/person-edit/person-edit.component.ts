@@ -38,6 +38,8 @@ export class PersonEditComponent extends EditComponent<Person> {
   repo = remult.repo(Person);
   override rootPath = '/crm/person/';
 
+  previewCustomerNumber: string = '';
+
   constructor(router: Router) {
     super(router);
   }
@@ -48,5 +50,6 @@ export class PersonEditComponent extends EditComponent<Person> {
       await this.createRelationItem('addresses');
     }
     this.repo.relations(this.entity!)
+    this.previewCustomerNumber = await this.entity!.previewCustomerNumber();
   }
 }

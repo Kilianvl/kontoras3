@@ -45,6 +45,9 @@ export class AutofieldComponent {
   @Input()
   helperText: string = "";
 
+  @Input()
+  placeholder: string = "";
+
   constructor(public form: NgForm) {}
 
   getOptionValues(field: string) {

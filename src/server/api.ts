@@ -11,16 +11,23 @@ import { initSearch } from './search';
 import { Address } from '../shared/entities/address';
 import { Company } from '../shared/entities/company';
 import { Person } from '../shared/entities/person';
+import { NumberRange } from '../shared/entities/number-range';
+import { bootstrap } from './bootstrap';
 
 export const api = remultExpress({
   dataProvider: async () =>
     new JsonDataProvider(new JsonEntityFileStorage('./data/db')),
   getUser: (req: express.Request) => (req.session as any)!['user'],
-  entities: [User, Person, Company, Address],
+  entities: [User, Person, Company, Address, NumberRange],
   admin: true,
   initApi: async () => {
     console.log('initApi');
-    await initSearch();
+    try {
+      await bootstrap();
+      await initSearch();
+    } catch (e) {
+      console.error(e);
+    }
   },
 });
 

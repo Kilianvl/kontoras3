@@ -1,16 +1,16 @@
 // src/server/index.ts
 
+import compression from 'compression';
 import express from 'express';
 import session from 'express-session';
+import open from 'open';
 import * as path from 'path';
-import compression from 'compression';
-import { search } from './search';
 import { api } from './api';
 import { auth } from './auth';
 import { initNodeRed } from './node-red';
-import open from 'open';
+import { search } from './search';
 //var FileStore = require('session-file-store')(session);
-import FileStore  from 'session-file-store';
+import FileStore from 'session-file-store';
 const sessionStore = FileStore(session);
 
 
@@ -47,9 +47,12 @@ app
 
 const server = app.listen(6002, () => {
   console.log('Server started');
+
   if (!process.argv.includes('--no-open')) {
     open('http://localhost:6002');
   }
 });
 
 initNodeRed(server, app);
+
+
