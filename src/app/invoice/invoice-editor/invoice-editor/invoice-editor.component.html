@@ -1,11 +1,11 @@
 <ng-container *ngIf="entity">
   <div cds-layout="horizontal gap:md align:left">
-    <h1>Person bearbeiten</h1>
+    <h1>Rechnung bearbeiten</h1>
 
-    <div cds-layout="align:right align:vertical-center">
+    <!-- <div cds-layout="align:right align:vertical-center">
       <button
         [routerLink]="
-          entity.id ? ['/crm/person', entity.id.toString()] : ['/crm/overview']
+          entity.customerId ? ['/crm/person', entity.id.toString()] : ['/crm/overview']
         "
         type="button"
         class="btn btn-icon btn-outline"
@@ -22,31 +22,87 @@
       >
         <cds-icon shape="floppy"></cds-icon>Änderungen speichern
       </button>
-    </div>
+    </div> -->
   </div>
 
   <main>
     <form #form="ngForm" clrForm clrLayout="horizontal">
-      <h3>Personendaten</h3>
+      <h3>Kontakt- und Rechnungsinformationen</h3>
       <app-autofield
-        [field]="fields.salutation!"
+        [field]="fields.address!"
+        width="350px"
         [(entity)]="entity"
       ></app-autofield>
       <app-autofield
-        [field]="fields.firstname"
+        [field]="fields.subject"
+        width="700px"
         [(entity)]="entity"
       ></app-autofield>
       <app-autofield
-        [field]="fields.lastname"
+        [field]="fields.invoiceNumber"
+        width="150px"
         [(entity)]="entity"
+        [placeholder]="previewInvoiceNumber"
       ></app-autofield>
+
       <app-autofield
-        [field]="fields.customerNumber"
+        [field]="fields.invoiceDate"
         width="400px"
         [(entity)]="entity"
-        [placeholder]="previewCustomerNumber"
       ></app-autofield>
-      <h3>Anschrift</h3>
+
+      <app-autofield
+        [field]="fields.reference"
+        width="300px"
+        [(entity)]="entity"
+      ></app-autofield>
+
+      <h3>Kopf-Text</h3>
+      <app-autofield
+        [field]="fields.headerText"
+        rows="5"
+        [(entity)]="entity"
+      ></app-autofield>
+
+      <h3>Produkte</h3>
+
+      <div style="display: flex; flex-direction: column;">
+        <div
+          style="
+            display: flex;
+            padding: 6px;
+          "
+        >
+          <label style="flex:1">Produkt oder Service</label>
+          <label style="flex:1">Menge</label>
+          <label style="flex:1">Mengetyp</label>
+          <label style="flex:1">Preis</label>
+          <label style="flex:1">Ust.</label>
+          <label style="flex:1">Rabatt</label>
+          <label style="flex:1">Rabatttyp</label>
+        </div>
+        <app-invoice-item-edit
+          *ngFor="let item of entity.items"
+          [item]="item"
+          [parent]="instance"
+        ></app-invoice-item-edit>
+      </div>
+
+      <button
+        cds-layout="m-t:md"
+        (click)="createRelationItem('items')"
+        type="button"
+        class="btn btn-outline"
+        aria-label="add-address"
+      >
+        <cds-icon shape="plus"></cds-icon> Adresse hinzufügen
+      </button>
+      <h3>Fusstext</h3>
+      <app-autofield
+        [field]="fields.footerText"
+        [(entity)]="entity"
+        rows="5"
+      ></app-autofield>
       <!-- TODO ADD COMPOENNT FOR ADDRESS-->
       <!-- <app-autofield
         [field]="fields.archived"
@@ -54,7 +110,7 @@
         helperText="Soll der Kunde archiviert sein?"
       ></app-autofield> -->
     </form>
-    <div cds-layout="m-t:xl">
+    <!-- <div cds-layout="m-t:xl">
       <clr-tabs>
         <clr-tab>
           <button clrTabLink>Adresse</button>
@@ -99,6 +155,6 @@
           </clr-tab-content>
         </clr-tab>
       </clr-tabs>
-    </div>
+    </div> -->
   </main>
 </ng-container>

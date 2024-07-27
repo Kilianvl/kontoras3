@@ -7,6 +7,7 @@ import { PersonViewComponent } from './crm/person-view/person-view.component';
 import { CompanyViewComponent } from './crm/company-view/company-view.component';
 import { CompanyEditComponent } from './crm/company-edit/company-edit.component';
 import { NumberRangesComponent } from './settings/number-ranges.component';
+import { InvoiceEditorComponent } from './invoice/invoice-editor/invoice-editor/invoice-editor.component';
 
 export const routes: Routes = [
 
@@ -40,6 +41,14 @@ export const routes: Routes = [
   canActivate: [authGuard],
   component: CompanyEditComponent,
 },
+
+{
+  path: 'om/invoice/:id',
+  canActivate: [authGuard],
+  component: InvoiceEditorComponent,
+},
+
+
 {
   path: 'settings/number-ranges',
   canActivate: [authGuard],

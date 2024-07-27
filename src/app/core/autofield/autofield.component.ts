@@ -11,6 +11,7 @@ import {
   ClrCheckboxModule,
   ClrComboboxModule,
   ClrFormsModule,
+  ClrTextareaModule,
 } from '@clr/angular';
 import { FieldMetadata, getEntityRef, getValueList } from 'remult';
 
@@ -24,6 +25,7 @@ import { FieldMetadata, getEntityRef, getValueList } from 'remult';
     ClarityModule,
     ClrCheckboxModule,
     ClrComboboxModule,
+    ClrTextareaModule
   ],
   templateUrl: './autofield.component.html',
   styleUrl: './autofield.component.scss',
@@ -32,6 +34,12 @@ import { FieldMetadata, getEntityRef, getValueList } from 'remult';
 export class AutofieldComponent {
   @Input()
   width: string = '100%';
+
+  @Input()
+  rows: string = '4';
+
+  @Input()
+  showLabel = true;
 
   @Input()
   entity!: any;

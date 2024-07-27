@@ -1,5 +1,5 @@
 <clr-checkbox-container *ngIf="field.inputType === 'checkbox'">
-  <label>{{ field.caption }}</label>
+  <label *ngIf="showLabel">{{ field.caption }}</label>
   <clr-checkbox-wrapper>
     <input
       type="checkbox"
@@ -7,16 +7,19 @@
       (blur)="onBlur($event)"
       [(ngModel)]="entity[field.key]"
       [name]="field.key"
-      [ngStyle]="{width: width}"
+      [ngStyle]="{ width: width }"
       [placeholder]="placeholder"
     />
   </clr-checkbox-wrapper>
   <clr-control-error>{{ form.form.get(field.key)?.errors }}</clr-control-error>
-  <clr-control-helper *ngIf="helperText" [innerHTML]="helperText"></clr-control-helper>
+  <clr-control-helper
+    *ngIf="helperText"
+    [innerHTML]="helperText"
+  ></clr-control-helper>
 </clr-checkbox-container>
 
 <clr-input-container *ngIf="field.inputType === undefined">
-  <label>{{ field.caption }}</label>
+  <label *ngIf="showLabel">{{ field.caption }}</label>
   <input
     clrInput
     type="text"
@@ -24,15 +27,38 @@
     [(ngModel)]="entity[field.key]"
     [name]="field.key"
     [attr.name]="field.key"
-    [ngStyle]="{width: width}"
+    [ngStyle]="{ width: width }"
     [placeholder]="placeholder"
   />
   <clr-control-error>{{ form.form.get(field.key)?.errors }}</clr-control-error>
-  <clr-control-helper *ngIf="helperText" [innerHTML]="helperText"></clr-control-helper>
+  <clr-control-helper
+    *ngIf="helperText"
+    [innerHTML]="helperText"
+  ></clr-control-helper>
 </clr-input-container>
 
+<clr-textarea-container *ngIf="field.inputType === 'multiline'">
+  <label *ngIf="showLabel">{{ field.caption }}</label>
+  <textarea
+    clrTextarea
+    type="text"
+    (blur)="onBlur($event)"
+    [(ngModel)]="entity[field.key]"
+    [name]="field.key"
+    [attr.name]="field.key"
+    [attr.rows]="rows"
+    [ngStyle]="{ width: width }"
+    [placeholder]="placeholder"
+  ></textarea>
+  <clr-control-error>{{ form.form.get(field.key)?.errors }}</clr-control-error>
+  <clr-control-helper
+    *ngIf="helperText"
+    [innerHTML]="helperText"
+  ></clr-control-helper>
+</clr-textarea-container>
+
 <clr-input-container *ngIf="field.inputType === 'number'">
-  <label>{{ field.caption }}</label>
+  <label *ngIf="showLabel">{{ field.caption }}</label>
   <input
     clrInput
     type="number"
@@ -40,21 +66,24 @@
     [(ngModel)]="entity[field.key]"
     [name]="field.key"
     [attr.name]="field.key"
-    [ngStyle]="{width: width}"
+    [ngStyle]="{ width: width }"
     [placeholder]="placeholder"
   />
   <clr-control-error>{{ form.form.get(field.key)?.errors }}</clr-control-error>
-  <clr-control-helper *ngIf="helperText" [innerHTML]="helperText"></clr-control-helper>
+  <clr-control-helper
+    *ngIf="helperText"
+    [innerHTML]="helperText"
+  ></clr-control-helper>
 </clr-input-container>
 
 <clr-select-container *ngIf="field.inputType === 'select-literal'">
-  <label>{{ field.caption }}</label>
+  <label *ngIf="showLabel">{{ field.caption }}</label>
   <select
     clrSelect
     [name]="field.key"
     (blur)="onBlur($event)"
     [(ngModel)]="entity[field.key]"
-    [ngStyle]="{width: width}"
+    [ngStyle]="{ width: width }"
   >
     <option *ngIf="field.options.allowNull" [ngValue]="null"></option>
     <option *ngFor="let value of getOptionValues(field.key)" [ngValue]="value">
