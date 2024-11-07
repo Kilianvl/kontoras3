@@ -12,6 +12,22 @@
       <span class="nav-text">{{remult.user?.name}}</span>
     </a>
 
+    <!-- Language Selection Dropdown -->
+    <clr-dropdown>
+      <button
+        class="nav-icon"
+        clrDropdownTrigger
+        aria-label="toggle language selection"
+      >
+        <cds-icon shape="world"></cds-icon> <!-- Changed to world icon -->
+        <cds-icon shape="angle" direction="down"></cds-icon>
+      </button>
+      <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+        <a (click)="changeLanguage('en')" clrDropdownItem>EN</a>
+        <a (click)="changeLanguage('de')" clrDropdownItem>DE</a>
+      </clr-dropdown-menu>
+    </clr-dropdown>
+
     <clr-dropdown>
       <button
         class="nav-icon"

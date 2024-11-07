@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { ClrDropdownModule, ClrIconModule } from '@clr/angular';
 import { AuthService } from '../auth/auth.service';
 import { CommonModule } from '@angular/common';
@@ -7,14 +8,19 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-head',
-  standalone: true,
-  imports: [ClrDropdownModule, ClrIconModule, CommonModule, RouterLink, RouterLinkActive],
   templateUrl: './head.component.html',
-  styleUrl: './head.component.scss',
+  styleUrls: ['./head.component.scss'],
+  imports: [ClrDropdownModule, ClrIconModule, CommonModule, RouterLink, RouterLinkActive],
+  standalone: true,
 })
 export class HeadComponent {
-  remult = remult;
-  constructor(public authService: AuthService) {}
+  remult = remult; // Define remult property
+
+  constructor(public authService: AuthService, private translate: TranslateService) {}
+
+  changeLanguage(lang: string) {
+    this.translate.use(lang);
+  }
 
   logout() {
     this.authService.logOut();

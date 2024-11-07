@@ -1,6 +1,6 @@
 <div *ngIf="entity">
   <form #form="ngForm" clrForm clrLayout="horizontal">
-    <h3>{{ entity.numberRangeType }}</h3>
+    <h3>{{ 'numberRangeType' | translate }}</h3> <!-- Updated to use translation key -->
 
     <app-autofield
       [field]="fields.nextSequenceValue"
@@ -10,7 +10,7 @@
     <app-autofield [field]="fields.format" [(entity)]="entity" [helperText]="helperText()"></app-autofield>
 
     <clr-input-container>
-      <label>Vorschau</label>
+      <label>{{ 'preview' | translate }}</label> <!-- Updated to use translation key -->
       <input
         clrInput
         type="text"
@@ -28,7 +28,7 @@
       class="btn btn-icon btn-outline"
       aria-label="cancel-edit-number-range"
     >
-      <cds-icon shape="undo"></cds-icon>Änderungen verwerfen
+      <cds-icon shape="undo"></cds-icon>{{ 'discardChanges' | translate }}
     </button>
     <button
       (click)="save()"
@@ -37,7 +37,7 @@
       class="btn btn-icon btn-success"
       aria-label="save-number-range"
     >
-      <cds-icon shape="floppy"></cds-icon>Änderungen speichern
+      <cds-icon shape="floppy"></cds-icon>{{ 'saveChanges' | translate }}
     </button>
   </div>
 </div>

@@ -1,7 +1,8 @@
 <ng-container *ngIf="entity">
   <div cds-layout="horizontal gap:md align:left">
-    <h1>Rechnung bearbeiten</h1>
+    <h1>{{ 'editInvoice' | translate }}</h1>
 
+    <!-- Keep the commented-out code -->
     <!-- <div cds-layout="align:right align:vertical-center">
       <button
         [routerLink]="
@@ -11,7 +12,7 @@
         class="btn btn-icon btn-outline"
         aria-label="cancel-edit-person"
       >
-        <cds-icon shape="undo"></cds-icon>Änderungen verwerfen
+        <cds-icon shape="undo"></cds-icon>{{ 'discardChanges' | translate }}
       </button>
       <button
         (click)="saveChanges()"
@@ -20,14 +21,14 @@
         class="btn btn-icon btn-success"
         aria-label="save-person"
       >
-        <cds-icon shape="floppy"></cds-icon>Änderungen speichern
+        <cds-icon shape="floppy"></cds-icon>{{ 'saveChanges' | translate }}
       </button>
     </div> -->
   </div>
 
   <main>
     <form #form="ngForm" clrForm clrLayout="horizontal">
-      <h3>Kontakt- und Rechnungsinformationen</h3>
+      <h3>{{ 'contactAndBillingInfo' | translate }}</h3>
       <app-autofield
         [field]="fields.address!"
         width="350px"
@@ -57,14 +58,14 @@
         [(entity)]="entity"
       ></app-autofield>
 
-      <h3>Kopf-Text</h3>
+      <h3>{{ 'headerText' | translate }}</h3>
       <app-autofield
         [field]="fields.headerText"
         rows="5"
         [(entity)]="entity"
       ></app-autofield>
 
-      <h3>Produkte</h3>
+      <h3>{{ 'products' | translate }}</h3>
 
       <div style="display: flex; flex-direction: column;">
         <div
@@ -73,13 +74,13 @@
             padding: 6px;
           "
         >
-          <label style="flex:1">Produkt oder Service</label>
-          <label style="flex:1">Menge</label>
-          <label style="flex:1">Mengetyp</label>
-          <label style="flex:1">Preis</label>
-          <label style="flex:1">Ust.</label>
-          <label style="flex:1">Rabatt</label>
-          <label style="flex:1">Rabatttyp</label>
+          <label style="flex:1">{{ 'productOrService' | translate }}</label>
+          <label style="flex:1">{{ 'quantity' | translate }}</label>
+          <label style="flex:1">{{ 'quantityType' | translate }}</label>
+          <label style="flex:1">{{ 'price' | translate }}</label>
+          <label style="flex:1">{{ 'tax' | translate }}</label>
+          <label style="flex:1">{{ 'discount' | translate }}</label>
+          <label style="flex:1">{{ 'discountType' | translate }}</label>
         </div>
         <app-invoice-item-edit
           *ngFor="let item of entity.items"
@@ -95,9 +96,9 @@
         class="btn btn-outline"
         aria-label="add-address"
       >
-        <cds-icon shape="plus"></cds-icon> Adresse hinzufügen
+        <cds-icon shape="plus"></cds-icon> {{ 'addAddress' | translate }}
       </button>
-      <h3>Fusstext</h3>
+      <h3>{{ 'footerText' | translate }}</h3>
       <app-autofield
         [field]="fields.footerText"
         [(entity)]="entity"

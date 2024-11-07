@@ -1,6 +1,6 @@
 <ng-container *ngIf="entity">
   <div cds-layout="horizontal gap:md align:left">
-    <h1 *ngIf="">Person: {{ entity.displayName }}</h1>
+    <h1>{{ 'company' | translate }}: {{ entity.displayName }}</h1>
 
     <div cds-layout="align:right align:vertical-center">
       <button
@@ -9,7 +9,7 @@
         aria-label="delete-company"
         [routerLink]="['/crm/overview']"
       >
-        <cds-icon shape="view-list"></cds-icon>Übersicht
+        <cds-icon shape="view-list"></cds-icon>{{ 'overview' | translate }}
       </button>
       <button
         type="button"
@@ -17,7 +17,7 @@
         aria-label="delete-company"
         (click)="confirmDelete()"
       >
-        <cds-icon shape="trash"></cds-icon>Kundenlöschen
+        <cds-icon shape="trash"></cds-icon>{{ 'deleteCustomer' | translate }}
       </button>
       <a
         [routerLink]="['./edit']"
@@ -25,7 +25,7 @@
         class="btn btn-icon btn-primary"
         aria-label="add-company"
       >
-        <cds-icon shape="pencil"></cds-icon>Kunden bearbeiten
+        <cds-icon shape="pencil"></cds-icon>{{ 'editCustomer' | translate }}
       </a>
     </div>
   </div>
@@ -34,33 +34,31 @@
     <table class="table table-vertical">
       <tbody>
         <tr>
-          <th>Company</th>
+          <th>{{ 'company' | translate }}</th>
           <td>{{ entity.name }}</td>
         </tr>
         <tr>
-          <th>Kundennummer</th>
-          <td>{{entity.customerNumber}}</td>
+          <th>{{ 'customerNumber' | translate }}</th>
+          <td>{{ entity.customerNumber }}</td>
         </tr>
         <tr>
-          <th>Erstellt am</th>
-          <td>{{ entity.createdAt | date : "short" }} Uhr</td>
+          <th>{{ 'createdAt' | translate }}</th>
+          <td>{{ entity.createdAt | date: "short" }} Uhr</td>
         </tr>
       </tbody>
     </table>
 
-
     <app-address-view *ngFor="let address of entity.addresses" [address]="address" [entity]="entity"></app-address-view>
-
   </main>
 
   <clr-modal
     [(clrModalOpen)]="showConfirmDeleteModal"
     [clrModalStaticBackdrop]="false"
   >
-    <h3 class="modal-title">Kunden löschen</h3>
+    <h3 class="modal-title">{{ 'deleteCustomer' | translate }}</h3>
     <div class="modal-body">
-      <b>Achtung!</b>
-      <p>Soll die Firma '{{ entity.name }}' wirklich gelöscht werden?</p>
+      <b>{{ 'warning' | translate }}</b>
+      <p>{{ 'confirmDeleteCompany' | translate: { entity: entity.name } }}</p>
     </div>
     <div class="modal-footer">
       <button
@@ -68,10 +66,10 @@
         class="btn btn-outline"
         (click)="showConfirmDeleteModal = false"
       >
-        Nein
+        {{ 'no' | translate }}
       </button>
       <button type="button" class="btn btn-danger" (click)="delete()">
-        Ja
+        {{ 'yes' | translate }}
       </button>
     </div>
   </clr-modal>

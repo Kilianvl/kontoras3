@@ -8,11 +8,13 @@ import { Invoice } from '../../../../shared/entities/invoice';
 import { AutofieldComponent } from '../../../core/autofield/autofield.component';
 import { EditComponent } from '../../../core/edit/edit.component';
 import { InvoiceItemEditComponent } from '../../invoice-item/invoice-item-edit.component';
+import { TranslateModule } from '@ngx-translate/core'; // Import TranslateModule
 
 @Component({
   selector: 'app-invoice-editor',
   standalone: true,
-  imports: [    CommonModule,
+  imports: [
+    CommonModule,
     FormsModule,
     ClrFormsModule,
     ClarityModule,
@@ -22,7 +24,9 @@ import { InvoiceItemEditComponent } from '../../invoice-item/invoice-item-edit.c
     ClrTabsModule,
     JsonPipe,
     RouterLink,
-    InvoiceItemEditComponent,],
+    InvoiceItemEditComponent,
+    TranslateModule // Add TranslateModule to imports
+  ],
   templateUrl: './invoice-editor.component.html',
   styleUrl: './invoice-editor.component.scss'
 })
@@ -44,5 +48,4 @@ export class InvoiceEditorComponent extends EditComponent<Invoice> {
     this.repo.relations(this.entity!)
     this.previewInvoiceNumber = await this.entity!.previewInvoiceNumber();
   }
-
 }

@@ -5,6 +5,7 @@ import { ClarityModule, ClrFormsModule } from '@clr/angular';
 import Handlebars from 'handlebars';
 import { ToastrService } from 'ngx-toastr';
 import { remult } from 'remult';
+import { TranslateModule } from '@ngx-translate/core';
 import {
   NumberRange,
   NumberRangeType,
@@ -20,6 +21,7 @@ import { AutofieldComponent } from '../../core/autofield/autofield.component';
     ClrFormsModule,
     ClarityModule,
     AutofieldComponent,
+    TranslateModule
   ],
   templateUrl: './number-range-edit.component.html',
   styleUrl: './number-range-edit.component.scss',

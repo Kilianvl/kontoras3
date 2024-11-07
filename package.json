@@ -24,6 +24,8 @@
     "@cds/core": "^6.11.0",
     "@clr/angular": "^17.2.0",
     "@clr/ui": "^17.2.0",
+    "@ngx-translate/core": "^16.0.3",
+    "@ngx-translate/http-loader": "^16.0.0",
     "@types/node-red": "^0.20.7",
     "bcryptjs": "^2.4.3",
     "compression": "^1.7.4",
