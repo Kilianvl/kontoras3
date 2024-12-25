@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { ClarityModule, ClrComboboxModule, ClrDatagridModule, ClrDatagridSortOrder, ClrDropdownModule } from "@clr/angular";
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
 import { remult } from 'remult';
 import { Customer } from '../../shared/entities/customer';
 import { Person } from '../../shared/entities/person';
@@ -11,7 +13,7 @@ import { Company } from '../../shared/entities/company';
 @Component({
   selector: 'app-crm',
   standalone: true,
-  imports: [CommonModule, FormsModule,ClarityModule, ClrComboboxModule,ClrDatagridModule,RouterLink,ClrDropdownModule],
+  imports: [CommonModule, FormsModule, ClarityModule, ClrComboboxModule, ClrDatagridModule, RouterLink, ClrDropdownModule, TranslateModule],
   templateUrl: './crm.component.html',
   styleUrl: './crm.component.scss',
 })
@@ -21,18 +23,17 @@ export class CrmComponent implements OnInit {
   customers: Customer[] = [];
 
   sortOrder: ClrDatagridSortOrder = ClrDatagridSortOrder.DESC;
-  constructor(private router: Router) {} // Initialize the 'router' variable
+  constructor(private router: Router, private translate: TranslateService, private toastr: ToastrService) {} // Initialize the 'router', 'translate', and 'toastr' variables
 
   async ngOnInit() {
-   const persons = await this.personRepo.find();
-   const companies = await this.companyRepo.find();
-   this.customers = [...persons, ...companies];
-
+    const persons = await this.personRepo.find();
+    const companies = await this.companyRepo.find();
+    this.customers = [...persons, ...companies];
   }
 
   copyCustomerId(id: string) {
     navigator.clipboard.writeText(id);
-
+    this.toastr.success(this.translate.instant('clipboardSuccess'));
   }
 
   openCustomer(entity: Customer) {

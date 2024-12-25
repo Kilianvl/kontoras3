@@ -54,6 +54,9 @@ export class AutofieldComponent {
   helperText: string = "";
 
   @Input()
+  label: string = "";
+
+  @Input()
   placeholder: string = "";
 
   constructor(public form: NgForm) {}

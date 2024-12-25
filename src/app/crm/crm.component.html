@@ -1,5 +1,5 @@
 <div cds-layout="horizontal gap:md align:left">
-  <h1>Kundenübersicht</h1>
+  <h1>{{ 'customerOverview' | translate }}</h1>
 
   <!-- <button [routerLink]="['/crm/person', 'new', 'edit']"
     cds-layout="align:right align:vertical-center"
@@ -13,7 +13,7 @@
 
   <clr-dropdown cds-layout="align:right align:vertical-center">
     <button class="btn btn-primary" clrDropdownTrigger>
-      <cds-icon shape="angle" direction="down"></cds-icon>Kunden hinzufügen
+      <cds-icon shape="angle" direction="down"></cds-icon>{{ 'addCustomer' | translate }}
     </button>
     <clr-dropdown-menu clrPosition="bottom-left" *clrIfOpen>
       <div
@@ -23,7 +23,7 @@
         cds-layout="p-y:xs"
         [routerLink]="['/crm/person', 'new', 'edit']"
       >
-        <cds-icon size="md" shape="id-badge"></cds-icon>Person
+        <cds-icon size="md" shape="id-badge"></cds-icon>{{ 'person' | translate }}
       </div>
       <div
         aria-label="Firma"
@@ -32,7 +32,7 @@
         cds-layout="p-y:xs"
         [routerLink]="['/crm/company', 'new', 'edit']"
       >
-        <cds-icon size="md" shape="building"></cds-icon>Firma
+        <cds-icon size="md" shape="building"></cds-icon>{{ 'company' | translate }}
       </div>
     </clr-dropdown-menu>
   </clr-dropdown>
@@ -40,46 +40,39 @@
 
 <main>
   <clr-datagrid>
-    <clr-dg-column style="width: 20px">ID</clr-dg-column>
-    <clr-dg-column style="width: 120px" [clrDgField]="'displayName'"
-      >Typ</clr-dg-column
-    >
-    <clr-dg-column [clrDgField]="'customerType'">Name</clr-dg-column>
+    <clr-dg-column style="width: 20px">{{ 'id' | translate }}</clr-dg-column>
+    <clr-dg-column style="width: 120px" [clrDgField]="'displayName'">{{ 'type' | translate }}</clr-dg-column>
+    <clr-dg-column [clrDgField]="'customerType'">{{ 'name' | translate }}</clr-dg-column>
     <clr-dg-column
       style="width: 200px"
       [clrDgField]="'createdAt'"
       [(clrDgSortOrder)]="sortOrder"
-      >Erstellt am</clr-dg-column
-    >
-    <clr-dg-column style="width: 200px" [clrDgField]="'updatedAt'"
-      >Aktualisiert am</clr-dg-column
-    >
+    >{{ 'createdAt' | translate }}</clr-dg-column>
+    <clr-dg-column style="width: 200px" [clrDgField]="'updatedAt'">{{ 'updatedAt' | translate }}</clr-dg-column>
     <clr-dg-row
       *clrDgItems="let customer of customers"
       [clrDgItem]="customer"
       (click)="openCustomer(customer)"
     >
-      <clr-dg-cell style="width: 20px"
-        ><clr-tooltip>
+      <clr-dg-cell style="width: 20px">
+        <clr-tooltip>
           <cds-icon
             clrTooltipTrigger
-            [attr.shape]="
-              customer.customerType === 'Person' ? 'id-badge' : 'building'
-            "
+            [attr.shape]="customer.customerType === 'Person' ? 'id-badge' : 'building'"
             size="18"
             (click)="copyCustomerId(customer.id)"
           ></cds-icon>
           <clr-tooltip-content [clrSize]="'md'">
             {{ customer.id }}
           </clr-tooltip-content>
-        </clr-tooltip></clr-dg-cell
-      >
+        </clr-tooltip>
+      </clr-dg-cell>
       <clr-dg-cell>{{ customer.customerType }}</clr-dg-cell>
       <clr-dg-cell>{{ customer.displayName }}</clr-dg-cell>
       <clr-dg-cell>{{ customer.createdAt | date : "short" }} Uhr</clr-dg-cell>
       <clr-dg-cell>{{ customer.updatedAt | date : "short" }} Uhr</clr-dg-cell>
     </clr-dg-row>
 
-    <clr-dg-footer>{{ customers.length }} Kunden</clr-dg-footer>
+    <clr-dg-footer>{{ customers.length }} {{ 'customers' | translate }}</clr-dg-footer>
   </clr-datagrid>
 </main>

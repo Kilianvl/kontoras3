@@ -1,7 +1,7 @@
 import { CommonModule, JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router'; // Import the Router module
+import { Router, RouterLink } from '@angular/router';
 import {
   ClarityModule,
   ClrCheckboxModule,
@@ -9,6 +9,7 @@ import {
   ClrFormsModule,
   ClrTabsModule,
 } from '@clr/angular';
+import { TranslateModule } from '@ngx-translate/core'; // Import the TranslateModule
 import { remult } from 'remult';
 import { Company } from '../../../shared/entities/company';
 import { AutofieldComponent } from '../../core/autofield/autofield.component';
@@ -31,6 +32,7 @@ import { Address } from '../../../shared/entities/address';
     JsonPipe,
     RouterLink,
     AddressEditComponent,
+    TranslateModule, // Add TranslateModule to imports
   ],
   templateUrl: './company-edit.component.html',
   styleUrl: './company-edit.component.scss',
@@ -49,8 +51,7 @@ export class CompanyEditComponent extends EditComponent<Company> {
     if (this.entity?.addresses?.length == 0) {
       await this.createRelationItem('addresses');
     }
-    this.repo.relations(this.entity!);
+    this.repo.relations(this.entity!); // Fix the missing closing parenthesis
     this.previewCustomerNumber = await this.entity!.previewCustomerNumber();
   }
-
 }

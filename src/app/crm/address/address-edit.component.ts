@@ -16,11 +16,12 @@ import { Address } from '../../../shared/entities/address';
 import { AutofieldComponent } from '../../core/autofield/autofield.component';
 import { EditComponent, RelationFormValidator } from '../../core/edit/edit.component';
 import { Customer } from '../../../shared/entities/customer';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-address-edit',
   standalone: true,
-  imports: [AutofieldComponent, FormsModule, ClrFormsModule],
+  imports: [AutofieldComponent, FormsModule, ClrFormsModule, TranslateModule],
   templateUrl: './address-edit.component.html',
   styleUrl: './address-edit.component.scss',
 })

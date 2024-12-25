@@ -1,5 +1,5 @@
 <clr-checkbox-container *ngIf="field.inputType === 'checkbox'">
-  <label *ngIf="showLabel">{{ field.caption }}</label>
+  <label *ngIf="showLabel">{{ label || field.caption }}</label>
   <clr-checkbox-wrapper>
     <input
       type="checkbox"
@@ -19,7 +19,7 @@
 </clr-checkbox-container>
 
 <clr-input-container *ngIf="field.inputType === undefined">
-  <label *ngIf="showLabel">{{ field.caption }}</label>
+  <label *ngIf="showLabel">{{ label || field.caption }}</label>
   <input
     clrInput
     type="text"
@@ -38,7 +38,7 @@
 </clr-input-container>
 
 <clr-textarea-container *ngIf="field.inputType === 'multiline'">
-  <label *ngIf="showLabel">{{ field.caption }}</label>
+  <label *ngIf="showLabel">{{ label || field.caption }}</label>
   <textarea
     clrTextarea
     type="text"
@@ -58,7 +58,7 @@
 </clr-textarea-container>
 
 <clr-input-container *ngIf="field.inputType === 'number'">
-  <label *ngIf="showLabel">{{ field.caption }}</label>
+  <label *ngIf="showLabel">{{ label || field.caption }}</label>
   <input
     clrInput
     type="number"
@@ -77,7 +77,7 @@
 </clr-input-container>
 
 <clr-select-container *ngIf="field.inputType === 'select-literal'">
-  <label *ngIf="showLabel">{{ field.caption }}</label>
+  <label *ngIf="showLabel">{{ label || field.caption }}</label>
   <select
     clrSelect
     [name]="field.key"

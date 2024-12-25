@@ -14,6 +14,7 @@ import { Router, RouterLink } from '@angular/router'; // Import the Router modul
 import { AutofieldComponent } from '../../core/autofield/autofield.component';
 import { EditComponent } from '../../core/edit/edit.component';
 import { AddressEditComponent } from '../address/address-edit.component';
+import { TranslateModule } from '@ngx-translate/core'; // Import TranslateModule
 
 @Component({
   selector: 'app-person-edit',
@@ -30,6 +31,7 @@ import { AddressEditComponent } from '../address/address-edit.component';
     JsonPipe,
     RouterLink,
     AddressEditComponent,
+    TranslateModule, // Add TranslateModule to imports
   ],
   templateUrl: './person-edit.component.html',
   styleUrl: './person-edit.component.scss',

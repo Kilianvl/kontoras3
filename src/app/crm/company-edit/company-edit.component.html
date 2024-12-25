@@ -1,6 +1,6 @@
 <ng-container *ngIf="entity">
   <div cds-layout="horizontal gap:md align:left">
-    <h1>Firma bearbeiten</h1>
+    <h1>{{ 'editCompany' | translate }}</h1>
 
     <div cds-layout="align:right align:vertical-center">
       <button
@@ -11,7 +11,7 @@
         class="btn btn-icon btn-outline"
         aria-label="cancel-edit-company"
       >
-        <cds-icon shape="undo"></cds-icon>Änderungen verwerfen
+        <cds-icon shape="undo"></cds-icon>{{ 'discardChanges' | translate }}
       </button>
       <button
         (click)="saveChanges()"
@@ -20,30 +20,32 @@
         class="btn btn-icon btn-success"
         aria-label="save-company"
       >
-        <cds-icon shape="floppy"></cds-icon>Änderungen speichern
+        <cds-icon shape="floppy"></cds-icon>{{ 'saveChanges' | translate }}
       </button>
     </div>
   </div>
 
   <main>
     <form #form="ngForm" clrForm clrLayout="horizontal">
-      <h3>Firmendaten</h3>
+      <h3>{{ 'companyData' | translate }}</h3>
       <app-autofield
         [field]="fields.name"
         width="400px"
         [(entity)]="entity"
+        [label]="'company' | translate"
       ></app-autofield>
       <app-autofield
         [field]="fields.customerNumber"
         width="400px"
         [(entity)]="entity"
         [placeholder]="previewCustomerNumber"
+        [label]="'customerNumber' | translate"
       ></app-autofield>
     </form>
     <div cds-layout="m-t:xl">
       <clr-tabs>
         <clr-tab>
-          <button clrTabLink>Adresse</button>
+          <button clrTabLink>{{ 'address' | translate }}</button>
           <clr-tab-content *clrIfActive="true">
               <app-address-edit *ngFor="let address of entity.addresses"
                 [address]="address"
@@ -56,30 +58,30 @@
               class="btn btn-outline"
               aria-label="add-address"
             >
-              <cds-icon shape="plus"></cds-icon> Adresse hinzufügen
+              <cds-icon shape="plus"></cds-icon> {{ 'addAddress' | translate }}
             </button>
           </clr-tab-content>
         </clr-tab>
         <clr-tab>
-          <button clrTabLink>Kontaktdetails</button>
+          <button clrTabLink>{{ 'contactDetails' | translate }}</button>
           <clr-tab-content *clrIfActive>
             <p cds-text="body" cds-layout="m-t:md">TODO</p>
           </clr-tab-content>
         </clr-tab>
         <clr-tab>
-          <button clrTabLink>Zahlungsinformationen</button>
+          <button clrTabLink>{{ 'paymentInformation' | translate }}</button>
           <clr-tab-content *clrIfActive>
             <p cds-text="body" cds-layout="m-t:md">TODO</p>
           </clr-tab-content>
         </clr-tab>
         <clr-tab>
-          <button clrTabLink>Konditionen</button>
+          <button clrTabLink>{{ 'conditions' | translate }}</button>
           <clr-tab-content *clrIfActive>
             <p cds-text="body" cds-layout="m-t:md">TODO</p>
           </clr-tab-content>
         </clr-tab>
         <clr-tab>
-          <button clrTabLink>Weiteres</button>
+          <button clrTabLink>{{ 'additional' | translate }}</button>
           <clr-tab-content *clrIfActive>
             <p cds-text="body" cds-layout="m-t:md">TODO</p>
           </clr-tab-content>

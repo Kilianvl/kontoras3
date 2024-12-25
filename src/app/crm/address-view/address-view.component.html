@@ -2,11 +2,11 @@
   <tbody>
     <tr>
       <th>
-        Adresse <br /><small>{{ address.addressType }}</small>
+        {{ 'address' | translate }} <br /><small>{{ address.addressType }}</small>
       </th>
       <td>
         {{ entity.displayName }}
-        <button class="btn btn-link" title="In die Zwischenablage kopieren" (click)="copy()">
+        <button class="btn btn-link" title="{{ 'copyToClipboard' | translate }}" (click)="copy()">
           <cds-icon shape="copy"></cds-icon>
         </button>
         <br *ngIf="address.street" />{{ address.street }}
