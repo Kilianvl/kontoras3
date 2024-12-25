@@ -3,18 +3,22 @@
     <cds-icon shape="user" clrVerticalNavIcon></cds-icon>
     Kunden
     <clr-vertical-nav-group-children>
-      <a
-        clrVerticalNavLink
-        routerLink="./crm/overview"
-        routerLinkActive="active"
-        >Kundenübersicht</a
-      >
-      <a
-        clrVerticalNavLink
-        routerLink="./om/invoice/new"
-        routerLinkActive="active"
-        >Neue Rechnung</a
-      >
+      <ng-container *ngIf="featureFlags.navigation.showCustomerOverview">
+        <a
+          clrVerticalNavLink
+          routerLink="./crm/overview"
+          routerLinkActive="active"
+          >Kundenübersicht</a
+        >
+      </ng-container>
+      <ng-container *ngIf="featureFlags.navigation.showNewInvoice">
+        <a
+          clrVerticalNavLink
+          routerLink="./om/invoice/new"
+          routerLinkActive="active"
+          >Neue Rechnung</a
+        >
+      </ng-container>
     </clr-vertical-nav-group-children>
   </clr-vertical-nav-group>
   <clr-vertical-nav-group routerLinkActive="active">

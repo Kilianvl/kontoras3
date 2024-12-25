@@ -7,11 +7,14 @@ import {
 } from '@clr/angular';
 import { CrmComponent } from '../crm/crm.component';
 import { HeadComponent } from '../head/head.component';
+import { featureFlags } from '../feature-flags';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-navigation',
   standalone: true,
   imports: [
+    CommonModule,
     ClrNavigationModule,
     ClrIconModule,
     RouterLink,
@@ -26,4 +29,5 @@ import { HeadComponent } from '../head/head.component';
 })
 export class NavigationComponent {
   demoCollapsible = false;
+  featureFlags = featureFlags;
 }

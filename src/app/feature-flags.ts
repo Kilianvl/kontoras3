@@ -1,4 +1,8 @@
 export const featureFlags = {
+  navigation: {
+    showCustomerOverview: true,
+    showNewInvoice: true,
+  },
   crmOverview: {
     enabled: true,
     showIdColumn: true,
