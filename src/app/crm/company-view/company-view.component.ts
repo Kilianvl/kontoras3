@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { ClarityModule } from '@clr/angular';
 import { AddressViewComponent } from '../address-view/address-view.component';
 import { TranslateModule } from '@ngx-translate/core'; // Import TranslateModule
+import { featureFlags } from '../../feature-flags';
 
 @Component({
   selector: 'app-company-view',
@@ -21,6 +22,7 @@ export class CompanyViewComponent implements OnInit {
   @Input() id!: string;
   repo = remult.repo(Company);
   entity?: Company;
+  featureFlags = featureFlags;
 
   constructor(private router: Router) {}
 

@@ -40,21 +40,17 @@
 
 <main>
   <clr-datagrid>
-    <clr-dg-column style="width: 20px">{{ 'id' | translate }}</clr-dg-column>
-    <clr-dg-column style="width: 120px" [clrDgField]="'displayName'">{{ 'type' | translate }}</clr-dg-column>
-    <clr-dg-column [clrDgField]="'customerType'">{{ 'name' | translate }}</clr-dg-column>
-    <clr-dg-column
-      style="width: 200px"
-      [clrDgField]="'createdAt'"
-      [(clrDgSortOrder)]="sortOrder"
-    >{{ 'createdAt' | translate }}</clr-dg-column>
-    <clr-dg-column style="width: 200px" [clrDgField]="'updatedAt'">{{ 'updatedAt' | translate }}</clr-dg-column>
+    <clr-dg-column *ngIf="featureFlags.showIdColumn" style="width: 20px">{{ 'id' | translate }}</clr-dg-column>
+    <clr-dg-column *ngIf="featureFlags.showTypeColumn" style="width: 120px" [clrDgField]="'displayName'">{{ 'type' | translate }}</clr-dg-column>
+    <clr-dg-column *ngIf="featureFlags.showNameColumn" [clrDgField]="'customerType'">{{ 'name' | translate }}</clr-dg-column>
+    <clr-dg-column *ngIf="featureFlags.showCreatedAtColumn" style="width: 200px" [clrDgField]="'createdAt'" [(clrDgSortOrder)]="sortOrder">{{ 'createdAt' | translate }}</clr-dg-column>
+    <clr-dg-column *ngIf="featureFlags.showUpdatedAtColumn" style="width: 200px" [clrDgField]="'updatedAt'">{{ 'updatedAt' | translate }}</clr-dg-column>
     <clr-dg-row
       *clrDgItems="let customer of customers"
       [clrDgItem]="customer"
       (click)="openCustomer(customer)"
     >
-      <clr-dg-cell style="width: 20px">
+      <clr-dg-cell *ngIf="featureFlags.showIdColumn" style="width: 20px">
         <clr-tooltip>
           <cds-icon
             clrTooltipTrigger
@@ -67,10 +63,10 @@
           </clr-tooltip-content>
         </clr-tooltip>
       </clr-dg-cell>
-      <clr-dg-cell>{{ customer.customerType }}</clr-dg-cell>
-      <clr-dg-cell>{{ customer.displayName }}</clr-dg-cell>
-      <clr-dg-cell>{{ customer.createdAt | date : "short" }} Uhr</clr-dg-cell>
-      <clr-dg-cell>{{ customer.updatedAt | date : "short" }} Uhr</clr-dg-cell>
+      <clr-dg-cell *ngIf="featureFlags.showTypeColumn">{{ customer.customerType }}</clr-dg-cell>
+      <clr-dg-cell *ngIf="featureFlags.showNameColumn">{{ customer.displayName }}</clr-dg-cell>
+      <clr-dg-cell *ngIf="featureFlags.showCreatedAtColumn">{{ customer.createdAt | date : "short" }} Uhr</clr-dg-cell>
+      <clr-dg-cell *ngIf="featureFlags.showUpdatedAtColumn">{{ customer.updatedAt | date : "short" }} Uhr</clr-dg-cell>
     </clr-dg-row>
 
     <clr-dg-footer>{{ customers.length }} {{ 'customers' | translate }}</clr-dg-footer>

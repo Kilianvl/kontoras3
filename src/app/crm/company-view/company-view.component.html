@@ -33,22 +33,24 @@
   <main>
     <table class="table table-vertical">
       <tbody>
-        <tr>
+        <tr *ngIf="featureFlags.companyView.showCompanyName">
           <th>{{ 'company' | translate }}</th>
           <td>{{ entity.name }}</td>
         </tr>
-        <tr>
+        <tr *ngIf="featureFlags.companyView.showCustomerNumber">
           <th>{{ 'customerNumber' | translate }}</th>
           <td>{{ entity.customerNumber }}</td>
         </tr>
-        <tr>
+        <tr *ngIf="featureFlags.companyView.showCreatedAt">
           <th>{{ 'createdAt' | translate }}</th>
-          <td>{{ entity.createdAt | date: "short" }} Uhr</td>
+          <td>{{ entity.createdAt | date: 'short' }} Uhr</td>
         </tr>
       </tbody>
     </table>
 
-    <app-address-view *ngFor="let address of entity.addresses" [address]="address" [entity]="entity"></app-address-view>
+    <ng-container *ngIf="featureFlags.companyView.showAddresses">
+      <app-address-view *ngFor="let address of entity.addresses" [address]="address" [entity]="entity"></app-address-view>
+    </ng-container>
   </main>
 
   <clr-modal

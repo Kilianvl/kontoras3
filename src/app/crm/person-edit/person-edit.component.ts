@@ -15,6 +15,7 @@ import { AutofieldComponent } from '../../core/autofield/autofield.component';
 import { EditComponent } from '../../core/edit/edit.component';
 import { AddressEditComponent } from '../address/address-edit.component';
 import { TranslateModule } from '@ngx-translate/core'; // Import TranslateModule
+import { featureFlags } from '../../feature-flags'; // Fix import path
 
 @Component({
   selector: 'app-person-edit',
@@ -41,6 +42,7 @@ export class PersonEditComponent extends EditComponent<Person> {
   override rootPath = '/crm/person/';
 
   previewCustomerNumber: string = '';
+  featureFlags = featureFlags.personEdit;
 
   constructor(router: Router) {
     super(router);

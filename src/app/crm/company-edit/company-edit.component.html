@@ -28,29 +28,33 @@
   <main>
     <form #form="ngForm" clrForm clrLayout="horizontal">
       <h3>{{ 'companyData' | translate }}</h3>
-      <app-autofield
-        [field]="fields.name"
-        width="400px"
-        [(entity)]="entity"
-        [label]="'company' | translate"
-      ></app-autofield>
-      <app-autofield
-        [field]="fields.customerNumber"
-        width="400px"
-        [(entity)]="entity"
-        [placeholder]="previewCustomerNumber"
-        [label]="'customerNumber' | translate"
-      ></app-autofield>
+      <ng-container *ngIf="featureFlags.companyEdit.showNameField">
+        <app-autofield
+          [field]="fields.name"
+          width="400px"
+          [(entity)]="entity"
+          [label]="'company' | translate"
+        ></app-autofield>
+      </ng-container>
+      <ng-container *ngIf="featureFlags.companyEdit.showCustomerNumberField">
+        <app-autofield
+          [field]="fields.customerNumber"
+          width="400px"
+          [(entity)]="entity"
+          [placeholder]="previewCustomerNumber"
+          [label]="'customerNumber' | translate"
+        ></app-autofield>
+      </ng-container>
     </form>
     <div cds-layout="m-t:xl">
       <clr-tabs>
-        <clr-tab>
+        <clr-tab *ngIf="featureFlags.companyEdit.showAddresses">
           <button clrTabLink>{{ 'address' | translate }}</button>
           <clr-tab-content *clrIfActive="true">
-              <app-address-edit *ngFor="let address of entity.addresses"
-                [address]="address"
-                [parent]="instance"
-              ></app-address-edit>
+            <app-address-edit *ngFor="let address of entity.addresses"
+              [address]="address"
+              [parent]="instance"
+            ></app-address-edit>
             <button
               cds-layout="m-t:md"
               (click)="createRelationItem('addresses')"
@@ -62,25 +66,25 @@
             </button>
           </clr-tab-content>
         </clr-tab>
-        <clr-tab>
+        <clr-tab *ngIf="featureFlags.companyEdit.showContactDetails">
           <button clrTabLink>{{ 'contactDetails' | translate }}</button>
           <clr-tab-content *clrIfActive>
             <p cds-text="body" cds-layout="m-t:md">TODO</p>
           </clr-tab-content>
         </clr-tab>
-        <clr-tab>
+        <clr-tab *ngIf="featureFlags.companyEdit.showPaymentInformation">
           <button clrTabLink>{{ 'paymentInformation' | translate }}</button>
           <clr-tab-content *clrIfActive>
             <p cds-text="body" cds-layout="m-t:md">TODO</p>
           </clr-tab-content>
         </clr-tab>
-        <clr-tab>
+        <clr-tab *ngIf="featureFlags.companyEdit.showConditions">
           <button clrTabLink>{{ 'conditions' | translate }}</button>
           <clr-tab-content *clrIfActive>
             <p cds-text="body" cds-layout="m-t:md">TODO</p>
           </clr-tab-content>
         </clr-tab>
-        <clr-tab>
+        <clr-tab *ngIf="featureFlags.companyEdit.showAdditional">
           <button clrTabLink>{{ 'additional' | translate }}</button>
           <clr-tab-content *clrIfActive>
             <p cds-text="body" cds-layout="m-t:md">TODO</p>

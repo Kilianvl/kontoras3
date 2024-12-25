@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { ClarityModule } from '@clr/angular';
 import { AddressViewComponent } from '../address-view/address-view.component';
 import { TranslateModule } from '@ngx-translate/core'; // Import TranslateModule
+import { featureFlags } from '../../feature-flags';
 
 @Component({
   selector: 'app-person-view',
@@ -17,6 +18,7 @@ import { TranslateModule } from '@ngx-translate/core'; // Import TranslateModule
 })
 export class PersonViewComponent implements OnInit {
   showConfirmDeleteModal = false;
+  featureFlags = featureFlags;
 
   @Input() id!: string;
   repo = remult.repo(Person);

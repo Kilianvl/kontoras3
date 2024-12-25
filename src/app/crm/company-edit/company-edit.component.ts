@@ -1,5 +1,5 @@
 import { CommonModule, JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import {
@@ -16,6 +16,7 @@ import { AutofieldComponent } from '../../core/autofield/autofield.component';
 import { EditComponent } from '../../core/edit/edit.component';
 import { AddressEditComponent } from '../address/address-edit.component';
 import { Address } from '../../../shared/entities/address';
+import { featureFlags } from '../../feature-flags'; // Corrected import path
 
 @Component({
   selector: 'app-company-edit',
@@ -37,12 +38,13 @@ import { Address } from '../../../shared/entities/address';
   templateUrl: './company-edit.component.html',
   styleUrl: './company-edit.component.scss',
 })
-export class CompanyEditComponent extends EditComponent<Company> {
+export class CompanyEditComponent extends EditComponent<Company> implements OnInit {
   override repo = remult.repo(Company);
 
   previewCustomerNumber: string = '';
 
   override rootPath = '/crm/company/';
+  featureFlags = featureFlags;
   constructor(router: Router) {
     super(router);
   }

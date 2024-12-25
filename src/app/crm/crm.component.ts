@@ -9,6 +9,7 @@ import { remult } from 'remult';
 import { Customer } from '../../shared/entities/customer';
 import { Person } from '../../shared/entities/person';
 import { Company } from '../../shared/entities/company';
+import { featureFlags } from '../feature-flags';
 
 @Component({
   selector: 'app-crm',
@@ -21,6 +22,7 @@ export class CrmComponent implements OnInit {
   personRepo = remult.repo(Person);
   companyRepo = remult.repo(Company);
   customers: Customer[] = [];
+  featureFlags = featureFlags.crmOverview;
 
   sortOrder: ClrDatagridSortOrder = ClrDatagridSortOrder.DESC;
   constructor(private router: Router, private translate: TranslateService, private toastr: ToastrService) {} // Initialize the 'router', 'translate', and 'toastr' variables
