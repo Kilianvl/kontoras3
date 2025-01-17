@@ -13,19 +13,19 @@ export interface RelationFormValidator {
 }
 
 @Component({
-  selector: 'app-edit',
-  standalone: true,
-  imports: [],
-  templateUrl: './edit.component.html',
-  styleUrl: './edit.component.scss',
+    selector: 'app-edit',
+    imports: [],
+    templateUrl: './edit.component.html',
+    styleUrl: './edit.component.scss'
 })
 export abstract class EditComponent<TEntity extends Base>
   implements OnInit, RelationFormValidator
 {
-  entity?: TEntity;
+  entity?: TEntity|null;
   instance?: any;
 
   abstract rootPath: string;
+  returnWithEntityId: boolean = true;
 
   @Input() id!: idType<TEntity>;
   abstract repo: Repository<TEntity>;
@@ -61,7 +61,14 @@ export abstract class EditComponent<TEntity extends Base>
       this.deleteList = [];
       this.entity = await this.saveRelations(this.repo, this.entity);
     }
+    if(this.returnWithEntityId)
+    {
     this.router.navigate([this.rootPath, this.entity!.id]);
+    }
+    else
+    {
+      this.router.navigate([this.rootPath]);
+    }
   }
 
   async saveRelations<T extends Base>(repo: Repository<T>, entity: T) {

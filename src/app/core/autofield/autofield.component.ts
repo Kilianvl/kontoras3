@@ -18,7 +18,6 @@ import { FieldMetadata, getEntityRef, getValueList } from 'remult';
 
 @Component({
   selector: 'app-autofield',
-  standalone: true,
   imports: [
     CommonModule,
     FormsModule,
@@ -27,7 +26,7 @@ import { FieldMetadata, getEntityRef, getValueList } from 'remult';
     ClrCheckboxModule,
     ClrComboboxModule,
     ClrTextareaModule,
-    ClrDatepickerModule
+    ClrDatepickerModule,
   ],
   templateUrl: './autofield.component.html',
   styleUrl: './autofield.component.scss',
@@ -53,13 +52,13 @@ export class AutofieldComponent {
   field!: FieldMetadata;
 
   @Input()
-  helperText: string = "";
+  helperText: string = '';
 
   @Input()
-  label: string = "";
+  label: string = '';
 
   @Input()
-  placeholder: string = "";
+  placeholder: string = '';
 
   constructor(public form: NgForm) {}
 
@@ -74,7 +73,9 @@ export class AutofieldComponent {
     if (result && result.modelState) {
       this.form.form
         .get(this.field.key)
-        ?.setErrors(result?.modelState[this.field.key] as unknown as ValidationErrors);
+        ?.setErrors(
+          result?.modelState[this.field.key] as unknown as ValidationErrors
+        );
     }
   }
 }

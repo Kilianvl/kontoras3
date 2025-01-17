@@ -1,4 +1,4 @@
-import { Fields, Validators } from 'remult';
+import { Fields, LifecycleEvent, Validators } from 'remult';
 import { SearchableEntity } from './searchable-entity';
 import { Customer } from './customer';
 
@@ -8,8 +8,8 @@ type SalutationType = (typeof salutations)[number];
 @SearchableEntity(Person, 'persons', {
   allowApiCrud: true,
   searchFields: ['firstname', 'lastname', 'customerNumber','position'],
-  deleted: async (person, e) => {
-    await Customer.onDeleted(person, e);
+  deleted: async (person, e: LifecycleEvent<Person>) => {
+    await Customer.onDeleted(person, e as LifecycleEvent<Customer>);
   },
   saving: async (entity, event) => {
       if (!entity.customerNumber) {
@@ -52,6 +52,12 @@ export class Person extends Customer {
   lastname = '';
 
   /**
+   * The birthdate of the person.
+   */
+  @Fields.dateOnly({ caption: 'Geburtsdatum' })
+  birthdate = new Date();
+
+  /**
    * The name addon of the person.
    */
   @Fields.string({ caption: 'Namenszusatz' })
@@ -65,6 +71,10 @@ export class Person extends Customer {
 
   get displayName() {
     return this.firstname + ' ' + this.lastname;
+  }
+
+  override toString() {
+    return this.displayName;
   }
 
   get customerType() {

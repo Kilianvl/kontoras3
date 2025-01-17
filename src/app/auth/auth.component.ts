@@ -3,15 +3,14 @@ import { Component, Inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ClrCheckboxModule, ClrDropdownModule, ClrInputModule, ClrPasswordModule, ClrSelectModule } from '@clr/angular';
 import { AuthService } from './auth.service';
-import { HttpClientModule } from '@angular/common/http';
+import {} from '@angular/common/http';
 import { ErrorService } from '../error.service';
 
 @Component({
-  selector: 'app-auth',
-  standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule, ClrDropdownModule, ClrSelectModule,ClrInputModule, ClrPasswordModule, ClrCheckboxModule],
-  templateUrl: './auth.component.html',
-  styleUrl: './auth.component.scss'
+    selector: 'app-auth',
+    imports: [CommonModule, FormsModule, ClrDropdownModule, ClrSelectModule, ClrInputModule, ClrPasswordModule, ClrCheckboxModule],
+    templateUrl: './auth.component.html',
+    styleUrl: './auth.component.scss'
 })
 export class AuthComponent {
 

@@ -12,11 +12,10 @@ import { Company } from '../../shared/entities/company';
 import { featureFlags } from '../feature-flags';
 
 @Component({
-  selector: 'app-crm',
-  standalone: true,
-  imports: [CommonModule, FormsModule, ClarityModule, ClrComboboxModule, ClrDatagridModule, RouterLink, ClrDropdownModule, TranslateModule],
-  templateUrl: './crm.component.html',
-  styleUrl: './crm.component.scss',
+    selector: 'app-crm',
+    imports: [CommonModule, FormsModule, ClarityModule, ClrComboboxModule, ClrDatagridModule, RouterLink, ClrDropdownModule, TranslateModule],
+    templateUrl: './crm.component.html',
+    styleUrl: './crm.component.scss'
 })
 export class CrmComponent implements OnInit {
   personRepo = remult.repo(Person);
@@ -28,8 +27,8 @@ export class CrmComponent implements OnInit {
   constructor(private router: Router, private translate: TranslateService, private toastr: ToastrService) {} // Initialize the 'router', 'translate', and 'toastr' variables
 
   async ngOnInit() {
-    const persons = await this.personRepo.find();
-    const companies = await this.companyRepo.find();
+    const persons = this.featureFlags.includePersons ? await this.personRepo.find() : [];
+    const companies = this.featureFlags.includeCompanies ? await this.companyRepo.find() : [];
     this.customers = [...persons, ...companies];
   }
 
