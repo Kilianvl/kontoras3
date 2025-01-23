@@ -14,6 +14,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { remult } from 'remult';
 import { Invoice } from '../../../shared/entities/invoice';
 import { featureFlags } from '../../feature-flags';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @Component({
   selector: 'app-invoice-view',
@@ -28,6 +29,7 @@ import { featureFlags } from '../../feature-flags';
     ClrTabsModule,
     ClrModalModule,
     TranslateModule, // Add TranslateModule to imports
+    PdfViewerModule,
   ],
   templateUrl: './invoice-view.component.html',
   styleUrl: './invoice-view.component.scss',

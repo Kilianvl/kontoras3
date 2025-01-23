@@ -33,7 +33,14 @@
     </div>
   </div>
 
-  <main></main>
+  <main>
+    <pdf-viewer
+      [src]="'/api/invoice/pdf?id=' + entity.id"
+      [autoresize]="false"
+      [fit-to-page]="true"
+      style="height: 1200px"
+    ></pdf-viewer>
+  </main>
 
   <clr-modal
     [(clrModalOpen)]="showConfirmDeleteModal"
