@@ -1,6 +1,7 @@
 export const featureFlags = {
   navigation: {
     showCustomerOverview: true,
+    showInvoiceOverview: true,
     showNewInvoice: true,
   },
   crmOverview: {
@@ -26,7 +27,7 @@ export const featureFlags = {
     showCompanyName: true,
     showCustomerNumber: true,
     showCreatedAt: true,
-    showAddresses: true
+    showAddresses: true,
   },
   companyEdit: {
     showNameField: true,
@@ -35,7 +36,7 @@ export const featureFlags = {
     showContactDetails: true,
     showPaymentInformation: true,
     showConditions: true,
-    showAdditional: true
+    showAdditional: true,
   },
   personEdit: {
     showSalutation: true,
@@ -48,5 +49,13 @@ export const featureFlags = {
     showPaymentInformation: true,
     showConditions: true,
     showAdditional: true,
-  }
+  },
+  omOverview: {
+    enabled: true,
+    showIdColumn: true,
+    showCreatedAtColumn: true,
+    showUpdatedAtColumn: true,
+    includeInvoices: true,
+    enableInvoiceCreation: true,
+  },
 };

@@ -1,0 +1,83 @@
+<div cds-layout="horizontal gap:md align:left">
+  <h1>{{ "invoiceOverview" | translate }}</h1>
+
+  <!-- <button [routerLink]="['/om/person', 'new', 'edit']"
+    cds-layout="align:right align:vertical-center"
+    type="button"
+    class="btn btn-icon btn-primary"
+    aria-label="add-invoice"
+  >
+    Kunden hinzufügen
+    <cds-icon shape="plus"></cds-icon>
+  </button> -->
+
+  <button
+    cds-layout="align:right align:vertical-center"
+    class="btn btn-primary"
+    [routerLink]="['/om/invoice', 'new', 'edit']"
+  >
+    {{ "createInvoice" | translate }}
+  </button>
+</div>
+
+<main>
+  <clr-datagrid>
+    <clr-dg-column *ngIf="featureFlags.showIdColumn" style="width: 20px">{{
+      "id" | translate
+    }}</clr-dg-column>
+    <clr-dg-column *ngIf="featureFlags.showIdColumn" style="width: 200px">{{
+      "invoiceNumber" | translate
+    }}</clr-dg-column>
+    <clr-dg-column *ngIf="featureFlags.showIdColumn" style="width: 200px">{{
+      "subject" | translate
+    }}</clr-dg-column>
+    <clr-dg-column *ngIf="featureFlags.showIdColumn" style="width: 200px">{{
+      "amount" | translate
+    }}</clr-dg-column>
+    <clr-dg-column
+      *ngIf="featureFlags.showCreatedAtColumn"
+      style="width: 200px"
+      [clrDgField]="'createdAt'"
+      [(clrDgSortOrder)]="sortOrder"
+      >{{ "createdAt" | translate }}</clr-dg-column
+    >
+    <clr-dg-column
+      *ngIf="featureFlags.showUpdatedAtColumn"
+      style="width: 200px"
+      [clrDgField]="'updatedAt'"
+      >{{ "updatedAt" | translate }}</clr-dg-column
+    >
+    <clr-dg-row
+      *clrDgItems="let invoice of invoices"
+      [clrDgItem]="invoice"
+      (click)="openInvoice(invoice)"
+    >
+      <clr-dg-cell *ngIf="featureFlags.showIdColumn" style="width: 20px">
+        <clr-tooltip>
+          <cds-icon
+            clrTooltipTrigger
+            shape="list"
+            size="18"
+            (click)="copyInvoiceId(invoice.id)"
+          ></cds-icon>
+          <clr-tooltip-content [clrSize]="'md'">
+            {{ invoice.id }}
+          </clr-tooltip-content>
+        </clr-tooltip>
+      </clr-dg-cell>
+      <clr-dg-cell>{{ invoice.invoiceNumber }}</clr-dg-cell>
+      <clr-dg-cell>{{ invoice.subject }}</clr-dg-cell>
+      <clr-dg-cell>{{ invoice.grossTotal | currency : "€" }}</clr-dg-cell>
+      <clr-dg-cell *ngIf="featureFlags.showCreatedAtColumn"
+        >{{ invoice.createdAt | date : "short" }} Uhr</clr-dg-cell
+      >
+      <clr-dg-cell *ngIf="featureFlags.showUpdatedAtColumn"
+        >{{ invoice.updatedAt | date : "short" }} Uhr</clr-dg-cell
+      >
+    </clr-dg-row>
+
+    <clr-dg-footer
+      >{{ invoices.length }} {{ "invoices" | translate }}</clr-dg-footer
+    >
+  </clr-datagrid>
+</main>

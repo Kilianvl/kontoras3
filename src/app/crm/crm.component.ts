@@ -2,7 +2,13 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { ClarityModule, ClrComboboxModule, ClrDatagridModule, ClrDatagridSortOrder, ClrDropdownModule } from "@clr/angular";
+import {
+  ClarityModule,
+  ClrComboboxModule,
+  ClrDatagridModule,
+  ClrDatagridSortOrder,
+  ClrDropdownModule,
+} from '@clr/angular';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { remult } from 'remult';
@@ -12,10 +18,19 @@ import { Company } from '../../shared/entities/company';
 import { featureFlags } from '../feature-flags';
 
 @Component({
-    selector: 'app-crm',
-    imports: [CommonModule, FormsModule, ClarityModule, ClrComboboxModule, ClrDatagridModule, RouterLink, ClrDropdownModule, TranslateModule],
-    templateUrl: './crm.component.html',
-    styleUrl: './crm.component.scss'
+  selector: 'app-crm',
+  imports: [
+    CommonModule,
+    FormsModule,
+    ClarityModule,
+    ClrComboboxModule,
+    ClrDatagridModule,
+    RouterLink,
+    ClrDropdownModule,
+    TranslateModule,
+  ],
+  templateUrl: './crm.component.html',
+  styleUrl: './crm.component.scss',
 })
 export class CrmComponent implements OnInit {
   personRepo = remult.repo(Person);
@@ -24,11 +39,19 @@ export class CrmComponent implements OnInit {
   featureFlags = featureFlags.crmOverview;
 
   sortOrder: ClrDatagridSortOrder = ClrDatagridSortOrder.DESC;
-  constructor(private router: Router, private translate: TranslateService, private toastr: ToastrService) {} // Initialize the 'router', 'translate', and 'toastr' variables
+  constructor(
+    private router: Router,
+    private translate: TranslateService,
+    private toastr: ToastrService
+  ) {} // Initialize the 'router', 'translate', and 'toastr' variables
 
   async ngOnInit() {
-    const persons = this.featureFlags.includePersons ? await this.personRepo.find() : [];
-    const companies = this.featureFlags.includeCompanies ? await this.companyRepo.find() : [];
+    const persons = this.featureFlags.includePersons
+      ? await this.personRepo.find()
+      : [];
+    const companies = this.featureFlags.includeCompanies
+      ? await this.companyRepo.find()
+      : [];
     this.customers = [...persons, ...companies];
   }
 
@@ -38,8 +61,8 @@ export class CrmComponent implements OnInit {
   }
 
   openCustomer(entity: Customer) {
-    console.log(entity.customerType)
-    switch(entity.customerType) {
+    console.log(entity.customerType);
+    switch (entity.customerType) {
       case 'Person':
         this.router.navigateByUrl('/crm/person/' + entity.id); // Use 'this.router' to navigate
         break;
@@ -51,5 +74,3 @@ export class CrmComponent implements OnInit {
     }
   }
 }
-
-

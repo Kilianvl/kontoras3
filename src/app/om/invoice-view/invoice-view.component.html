@@ -1,0 +1,65 @@
+<ng-container *ngIf="entity">
+  <div cds-layout="horizontal gap:md align:left">
+    <h1>{{ "invoice" | translate }} {{ entity.displayName }}</h1>
+
+    <div cds-layout="align:right align:vertical-center">
+      <button
+        type="button"
+        class="btn btn-icon btn-outline"
+        aria-label="delete-invoice"
+        [routerLink]="['/om/invoice']"
+      >
+        {{ "overview" | translate }}
+        <cds-icon shape="view-list"></cds-icon>
+      </button>
+      <button
+        type="button"
+        class="btn btn-icon btn-danger"
+        aria-label="delete-invoice"
+        (click)="confirmDelete()"
+      >
+        {{ "deleteInvoice" | translate }}
+        <cds-icon shape="trash"></cds-icon>
+      </button>
+      <a
+        [routerLink]="['./edit']"
+        type="button"
+        class="btn btn-icon btn-primary"
+        aria-label="add-invoice"
+      >
+        {{ "editInvoice" | translate }}
+        <cds-icon shape="pencil"></cds-icon>
+      </a>
+    </div>
+  </div>
+
+  <main></main>
+
+  <clr-modal
+    [(clrModalOpen)]="showConfirmDeleteModal"
+    [clrModalStaticBackdrop]="false"
+  >
+    <h3 class="modal-title">{{ "deleteInvoice" | translate }}</h3>
+    <div class="modal-body">
+      <b>{{ "warning" | translate }}</b>
+      <p>
+        {{
+          "confirmDeleteInvoice"
+            | translate : { displayName: entity.displayName }
+        }}
+      </p>
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-outline"
+        (click)="showConfirmDeleteModal = false"
+      >
+        {{ "no" | translate }}
+      </button>
+      <button type="button" class="btn btn-danger" (click)="delete()">
+        {{ "yes" | translate }}
+      </button>
+    </div>
+  </clr-modal>
+</ng-container>

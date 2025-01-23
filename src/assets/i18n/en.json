@@ -29,6 +29,7 @@
   "customerNumber": "Customer Number",
   "createdAt": "Created At",
   "confirmDeletePerson": "Are you sure you want to delete the person '{{ firstname }} {{ lastname }}'?",
+  "confirmDeleteInvoice": "Are you sure you want to delete the invoice '{{ displayName }}'?",
   "no": "No",
   "yes": "Yes",
   "editCustomer": "Edit Customer",
@@ -63,5 +64,15 @@
   "removeAddress": "Remove Address",
   "copyToClipboard": "Copy to clipboard",
   "birthdate": "Birthdate",
-  "add": "Add"
+  "add": "Add",
+  "addInvoicePosition": "Add Position",
+  "createInvoice": "Create Invoice",
+  "cancel": "Cancel",
+  "invoiceOverview": "Invoice Overview",
+  "deleteInvoice": "Delete Invoice",
+  "invoice": "Invoice",
+  "amount": "Amount",
+  "invoiceNumber": "Invoice Number",
+  "subject": "Subject",
+  "removeInvoicePosition": "Delete"
 }

@@ -1,0 +1,137 @@
+<ng-container *ngIf="entity">
+  <div cds-layout="horizontal gap:md align:left">
+    <h1>{{ (entity.id ? "editInvoice" : "createInvoice") | translate }}</h1>
+
+    <div cds-layout="align:right align:vertical-center">
+      <button
+        [routerLink]="
+          entity.id ? ['/om/invoice', entity.id.toString()] : ['/om/invoice']
+        "
+        type="button"
+        class="btn btn-icon btn-outline"
+        aria-label="cancel-edit-invoice"
+      >
+        <cds-icon shape="undo"></cds-icon
+        >{{ (entity.id ? "discardChanges" : "cancel") | translate }}
+      </button>
+      <button
+        (click)="saveChanges()"
+        [disabled]="form?.form?.invalid"
+        type="button"
+        class="btn btn-icon btn-success"
+        aria-label="save-invoice"
+      >
+        <cds-icon shape="floppy"></cds-icon
+        >{{ (entity.id ? "saveChanges" : "createInvoice") | translate }}
+      </button>
+    </div>
+  </div>
+
+  <main>
+    <form #form="ngForm" clrForm clrLayout="horizontal">
+      <h3>{{ "contactAndBillingInfo" | translate }}</h3>
+      <app-autofield
+        [field]="fields.address!"
+        width="350px"
+        [(entity)]="entity"
+      ></app-autofield>
+      <app-autofield
+        [field]="fields.subject"
+        width="700px"
+        [(entity)]="entity"
+      ></app-autofield>
+      <app-autofield
+        [field]="fields.invoiceNumber"
+        width="150px"
+        [(entity)]="entity"
+        [placeholder]="previewInvoiceNumber"
+      ></app-autofield>
+
+      <app-autofield
+        [field]="fields.invoiceDate"
+        width="400px"
+        [(entity)]="entity"
+      ></app-autofield>
+
+      <app-autofield
+        [field]="fields.reference"
+        width="300px"
+        [(entity)]="entity"
+      ></app-autofield>
+
+      <h3>{{ "headerText" | translate }}</h3>
+      <app-autofield
+        [field]="fields.headerText"
+        rows="5"
+        [(entity)]="entity"
+      ></app-autofield>
+
+      <h3>{{ "products" | translate }}</h3>
+
+      <div class="btn-group">
+        <div class="radio btn">
+          <input
+            type="radio"
+            name="btn-group-demo-radios"
+            id="btn-demo-radio-1"
+            (click)="setVatType('Netto')"
+            [checked]="entity.vatType === 'Netto'"
+          />
+          <label for="btn-demo-radio-1">Netto</label>
+        </div>
+        <div class="radio btn">
+          <input
+            type="radio"
+            name="btn-group-demo-radios"
+            id="btn-demo-radio-2"
+            (click)="setVatType('Brutto')"
+            [checked]="entity.vatType === 'Brutto'"
+          />
+          <label for="btn-demo-radio-2">Brutto</label>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column">
+        <div style="display: flex; padding: 6px">
+          <label style="flex: 1">{{ "productOrService" | translate }}</label>
+          <label style="flex: 1">{{ "quantity" | translate }}</label>
+          <label style="flex: 1">{{ "quantityType" | translate }}</label>
+          <label style="flex: 1">{{ "price" | translate }}</label>
+          <label style="flex: 1">{{ "tax" | translate }}</label>
+          <label style="flex: 1">{{ "discount" | translate }}</label>
+          <label style="flex: 1">{{ "discountType" | translate }}</label>
+          <label style="flex: 1">{{ "total" | translate }}</label>
+          <label style="flex: 1"></label>
+        </div>
+        <app-invoice-item-edit
+          *ngFor="let item of entity.items"
+          [item]="item"
+          [parent]="instance"
+        ></app-invoice-item-edit>
+      </div>
+
+      <div>net: {{ entity.netTotal | currency : "EUR" }}</div>
+      <div>gross: {{ entity.grossTotal | currency : "EUR" }}</div>
+      <div *ngFor="let vat of entity.vatTotals">
+        {{ vat.vat }}: {{ vat.total | currency : "EUR" }}
+      </div>
+
+      <button
+        cds-layout="m-t:md"
+        (click)="createRelationItem('items')"
+        type="button"
+        class="btn btn-outline"
+        aria-label="add-item"
+      >
+        <cds-icon shape="plus"></cds-icon>
+        {{ "addInvoicePosition" | translate }}
+      </button>
+      <h3>{{ "footerText" | translate }}</h3>
+      <app-autofield
+        [field]="fields.footerText"
+        [(entity)]="entity"
+        rows="5"
+      ></app-autofield>
+    </form>
+  </main>
+</ng-container>

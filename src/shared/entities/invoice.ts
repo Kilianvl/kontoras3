@@ -20,17 +20,18 @@ type VatType = (typeof vatTypes)[number];
     await Invoice.onDeleted(person, e);
   },
   saving: async (entity, event) => {
-      if (!entity.invoiceNumber) {
-        entity.sequenceNumber = await entity.createSequenceNumber();
-        entity.invoiceNumber = await entity.createInvoiceNumber(entity.sequenceNumber);
-      }
+    if (!entity.invoiceNumber) {
+      entity.sequenceNumber = await entity.createSequenceNumber();
+      entity.invoiceNumber = await entity.createInvoiceNumber(
+        entity.sequenceNumber
+      );
+    }
   },
 })
 /**
  * Represents an invoice entity.
  */
 export class Invoice extends Base {
-
   /**
    * The sequence number.
    */
@@ -61,7 +62,7 @@ export class Invoice extends Base {
   @Fields.string({ caption: 'Kopf-Text', inputType: 'multiline' })
   headerText = '';
 
-  @Fields.string({ caption: 'Fuß-Text', inputType: 'multiline'})
+  @Fields.string({ caption: 'Fuß-Text', inputType: 'multiline' })
   footerText = '';
 
   @Fields.literal(() => vatTypes, {
@@ -69,7 +70,7 @@ export class Invoice extends Base {
     allowNull: true,
     inputType: 'select-literal',
   })
-  vatType?: VatType;
+  vatType?: VatType = 'Netto';
 
   /**
    * The invoice items associated with the invoice.
@@ -80,7 +81,49 @@ export class Invoice extends Base {
   })
   items?: InvoiceItem[] = [];
 
+  get displayName() {
+    return `${this.invoiceNumber} ${this.subject}`;
+  }
 
+  get netTotal() {
+    if (this.vatType === 'Netto') {
+      return this.items!.reduce((sum, item) => sum + item.total, 0);
+    } else {
+      return this.items!.reduce(
+        (sum, item) => sum + item.total / (1 + item.vat / 100),
+        0
+      );
+    }
+  }
+
+  get grossTotal() {
+    if (this.vatType === 'Brutto') {
+      return this.items!.reduce((sum, item) => sum + item.total, 0);
+    } else {
+      return this.items!.reduce(
+        (sum, item) => sum + item.total * (1 + item.vat / 100),
+        0
+      );
+    }
+  }
+
+  get vatTotals(): { vat: number; total: number }[] {
+    const vatTotals = new Map<number, number>();
+    this.items!.forEach((item) => {
+      const vat = item.vat;
+      let total;
+      if (this.vatType === 'Brutto') {
+        total = item.total * (vat / (100 + vat));
+      } else {
+        total = item.total * (vat / 100);
+      }
+      vatTotals.set(vat, (vatTotals.get(vat) || 0) + total);
+    });
+    return Array.from(vatTotals.entries()).map(([vat, total]) => ({
+      vat,
+      total,
+    }));
+  }
 
   static async onDeleted(entity: Invoice, e: LifecycleEvent<Invoice>) {
     await e.relations.items.deleteMany({
@@ -116,5 +159,4 @@ export class Invoice extends Base {
     const invoiceNumber = numberRange!.formatSequenceValue(sequenceNumber);
     return invoiceNumber;
   }
-
 }
