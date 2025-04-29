@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  kontoras3:
+    build:
+      context: .
+    ports:
+      - "6002:6002"
+    volumes:
+      - ./data:/app/data
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
